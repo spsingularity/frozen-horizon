@@ -15,7 +15,17 @@ saddle, the contour over its unstable direction, the admissible window
 `7/4 < μ² < 4`, and the discrete `S³` mode-crossing kernel.
 
 Every table and figure in both manuscripts is a build artifact of this
-pipeline. No number in either paper is transcribed by hand.
+pipeline. Numbers quoted in the prose are checked against it by
+`scripts/check_manuscript.py`, which recomputes each one and fails if the
+manuscript disagrees:
+
+```bash
+./.venv/bin/python scripts/check_manuscript.py -v
+```
+
+This runs as part of the test suite. It exists because generated tables
+cannot drift but prose can: the first release of Paper II quoted a total
+duration belonging to a superseded run, and nothing caught it.
 
 ## Install
 
@@ -58,8 +68,18 @@ To regenerate the underlying runs rather than use the stored ones (each
 
 ```bash
 ./.venv/bin/python scripts/run_pipeline.py --p 66 --alpha 2.809064 \
-    --n-star 50.5852 --k-points 160 --outdir results/invwall_p66
+    --n-star auto --k-points 160 --outdir results/invwall_p66
 ./.venv/bin/python scripts/lowl_likelihood_eval.py invwall_p66      # etc.
+```
+
+`--n-star auto` solves the reheating fixed point rather than accepting a
+literal. N_* is not a free input — the background fixes the reheating
+history, which fixes N_*, which fixes the background — so a hand-supplied
+value can go stale when the reheating model changes. It did: the first
+release computed the spectra at `50.5852` against a converged `50.5966`.
+The map is nearly flat, so `auto` converges in one step.
+
+```bash
 ```
 
 ## Layout
@@ -89,6 +109,7 @@ To regenerate the underlying runs rather than use the stored ones (each
 | `eos_reheating.py` | scalaron equation of state measured, not assumed |
 | `shape_statistic.py` | translation-invariant `D_pp'`: `p` is not observable beyond feature location |
 | `marginalize_rungs.py` | rung-marginalized evidence (reads the likelihood JSON; no embedded numbers) |
+| `check_manuscript.py` | every number in the manuscript prose, recomputed and matched against the `.tex` |
 
 ## Notes on the stored results
 

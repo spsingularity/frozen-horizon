@@ -23,8 +23,32 @@ from frozen_horizon import (  # noqa: E402
     modes,
     observables,
     projection,
+    reheating,
     stochastic,
 )
+
+
+def solve_n_star(fh_model, requested, xi_higgs, tolerance=1.0e-9, max_steps=12):
+    """Return the pivot e-fold count, solving the fixed point if asked.
+
+    N_* is not a free input: the background determines the reheating history,
+    which determines N_*, which determines the background. Passing a literal
+    is therefore a self-consistency hazard -- the published p = 66 spectra
+    were computed at 50.5852 while the converged value is 50.5966, a gap of
+    0.011 e-folds that moved the feature location by just over one percent.
+    The map is nearly flat, so 'auto' converges in a single step.
+    """
+    if not (isinstance(requested, str) and requested.lower() == "auto"):
+        return float(requested)
+    n_star = float(config.N_STAR)
+    for _ in range(max_steps):
+        solved = reheating.solve_n_star_resolved(
+            background.prepare(fh_model, n_star=n_star), xi_higgs=xi_higgs
+        )["N_star"]
+        if abs(solved - n_star) < tolerance:
+            return solved
+        n_star = solved
+    raise RuntimeError(f"N_* fixed point did not converge (last {n_star})")
 
 
 def notch_location(k_ratios, transfer, k_pivot=None):
@@ -54,7 +78,13 @@ def main():
     parser.add_argument("--alpha", type=float, default=None,
                         help="wall coefficient; default 3 (dz sum rule), "
                              "2 is the RG measure, 0 the linear single-operator wall")
-    parser.add_argument("--n-star", type=float, default=config.N_STAR)
+    parser.add_argument("--n-star", default=config.N_STAR,
+                        help="pivot e-folds, or 'auto' to solve the reheating "
+                             "fixed point self-consistently (recommended: a "
+                             "hand-supplied value can silently go stale when "
+                             "the reheating model changes)")
+    parser.add_argument("--xi", type=float, default=1.0 / 6.0,
+                        help="Higgs non-minimal coupling used when --n-star=auto")
     parser.add_argument("--k-min", type=float, default=2.0e-5)
     parser.add_argument("--k-max", type=float, default=10.0)
     parser.add_argument("--k-points", type=int, default=32)
@@ -81,7 +111,8 @@ def main():
     }
 
     print("[2/6] background", flush=True)
-    bg = background.prepare(fh_model, n_star=args.n_star)
+    n_star = solve_n_star(fh_model, args.n_star, args.xi)
+    bg = background.prepare(fh_model, n_star=n_star)
     stability = bg.stability()
     flow = modes.hubble_flow_tilts(bg)
     background_block = {
@@ -164,7 +195,10 @@ def main():
             "A_s_obs": config.A_S_OBS,
             "k_pivot_Mpc": config.K_PIVOT,
             "chi_star_Mpc": config.CHI_STAR,
-            "n_star": args.n_star,
+            "n_star": n_star,
+            "n_star_mode": ("auto (reheating fixed point)"
+                            if str(args.n_star).lower() == "auto"
+                            else "supplied"),
             "horizon_offset": config.HORIZON_OFFSET,
             "k_range": [args.k_min, args.k_max, args.k_points],
         },

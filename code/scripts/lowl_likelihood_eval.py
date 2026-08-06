@@ -109,7 +109,23 @@ def main():
               f"{r['dTT']:>8.3f} {r['chi2_EE_feat']:>9.3f} {r['chi2_EE_smooth']:>9.3f} "
               f"{r['dEE']:>8.3f} {r['dTOT']:>8.3f}")
     print()
-    print(json.dumps(rows, indent=1))
+    # Write the file the manuscript tables and marginalize_rungs.py read.
+    # This used to be printed to stdout only, which meant results/ could go
+    # stale while the runs underneath it were regenerated: the file is the
+    # authoritative record, so producing it must not depend on a shell
+    # redirect the caller might forget. Entries for runs not evaluated in
+    # this invocation are preserved.
+    destination = os.path.join(REPO, "results", "lowl_likelihood.json")
+    merged = {}
+    if os.path.exists(destination):
+        with open(destination) as handle:
+            merged = {row["run"]: row for row in json.load(handle)}
+    merged.update({row["run"]: row for row in rows})
+    ordered = sorted(merged.values(), key=lambda row: row["run"])
+    with open(destination, "w") as handle:
+        json.dump(ordered, handle, indent=1)
+        handle.write("\n")
+    print(f"wrote {destination} ({len(ordered)} runs)")
 
 
 if __name__ == "__main__":

@@ -73,6 +73,26 @@ class Report:
             print(f"  FAIL  {label:<44} {rendered} not found in {paper.name}")
         return ok
 
+    def absent(self, paper, label, stale):
+        """Assert a superseded value does NOT appear.
+
+        claim() only checks that the current value is present somewhere. A
+        paper that quotes the same quantity in five places can therefore pass
+        while four of them still hold the old number -- which happened: after
+        the coordinate branch was re-run, four occurrences of the exclusion
+        Delta chi^2 were updated and a fifth, phrased differently, was not.
+        Presence of the new value is necessary but not sufficient; absence of
+        the old one is the other half.
+        """
+        self.checked += 1
+        if stale not in strip(paper.read_text()):
+            if self.verbose:
+                print(f"  ok    {label:<44} no stale {stale}")
+            return True
+        self.failures.append((paper.name, label, f"stale {stale} still present"))
+        print(f"  FAIL  {label:<44} stale value {stale} still in {paper.name}")
+        return False
+
     def exempt(self, label, why):
         if self.verbose:
             print(f"  --    {label:<44} exempt: {why}")
@@ -152,6 +172,9 @@ def paper1_claims(report):
     best = min(likelihood[r] for r in
                ("invwall_p66", "resolved_p64", "invwall_p65", "resolved_p65"))
     report.claim(PAPER1, "best preferred rung", best, "{:.1f}")
+    # Superseded exclusion values, from before the N_* fixed point was solved.
+    for stale in ("$+13.4$", "$+8.2$", "$+8.189$"):
+        report.absent(PAPER1, f"stale exclusion {stale}", stale)
 
     report.exempt("A_s, Planck cosmology, chi_*", "observational inputs")
     report.exempt("N=54.4 of Bezrukov-Gorbunov", "cited from literature")
@@ -203,6 +226,10 @@ def paper2_claims(report):
     kick = stochastic.tachyonic_kick_factor(1.0, mu2=model.mu_squared)
     report.claim(PAPER2, "double-count ln sqrt(Q)/s",
                  np.log(kick) / model.exit_exponent, "{:.3f}")
+
+    # Values from the superseded p = 67 run that Paper II used to quote.
+    for stale in ("74.403", "74.40", "4.5\\times10^{-12}", "2\\times10^{-8}"):
+        report.absent(PAPER2, f"stale p=67 value {stale}", stale)
 
     report.exempt("WKB bound 9/4, window 7/4 and 4", "exact rationals in text")
 

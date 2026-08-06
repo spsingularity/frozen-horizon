@@ -30,57 +30,45 @@ duration belonging to a superseded run, and nothing caught it.
 ## Install
 
 ```bash
+cd code
 python3 -m venv .venv
-./.venv/bin/pip install -r code/requirements.txt
-```
-
-The Planck low-`ℓ` likelihood data (~16 MB) is fetched separately:
-
-```bash
-./.venv/bin/cobaya-install planck_2018_lowl.TT planck_2018_lowl.EE \
-    --packages-path code/cobaya_packages
+./.venv/bin/pip install -r requirements.txt
 ```
 
 ## Reproducing the manuscripts
 
-From `code/`:
+One script goes from a clean checkout to both PDFs:
 
 ```bash
-# Paper I: ledger, tables, figures
-# The wall coefficient of the primary branch is derivable rather than assumed:
-#   bootstrap.canonical_wall_coefficient(66) -> 2.809064
-# and the other three measures are exact (3, 2, and 2 + 1/p respectively).
-./.venv/bin/python scripts/make_ledger.py --p 66 --alpha 2.809064 \
-    --xi 0.16666666666666666 --results invwall_p
-./.venv/bin/python scripts/make_paper_tables.py
-./.venv/bin/python scripts/make_figures.py
-
-# Paper II: tables and figures (analytic; no stored results needed)
-./.venv/bin/python scripts/make_paper2_assets.py
-
-./.venv/bin/python -m pytest tests/ --run-slow
+./reproduce.sh              # full: every spectrum recomputed (~2 h)
+./reproduce.sh --fast       # rebuild assets and papers from the stored runs
+./reproduce.sh --check      # verify only; recompute nothing
 ```
 
-Then `make` in `paper/` and `paper/paper2/`.
+It fetches the Planck low-`ℓ` likelihood data on first use (~16 MB), runs
+the thirteen pipeline configurations, evaluates the likelihoods, regenerates
+every table and figure, runs the tests, checks the manuscript prose against
+the pipeline, and typesets both papers. A green run means the manuscripts
+and the code agree.
 
-To regenerate the underlying runs rather than use the stored ones (each
-160-point spectrum takes a few minutes):
+The individual steps, if you want them separately, are in the script; it is
+short and ordered. Two conventions it encodes are worth stating here.
 
-```bash
-./.venv/bin/python scripts/run_pipeline.py --p 66 --alpha 2.809064 \
-    --n-star auto --k-points 160 --outdir results/invwall_p66
-./.venv/bin/python scripts/lowl_likelihood_eval.py invwall_p66      # etc.
-```
+**`N_*` is not a free input.** The background fixes the reheating history,
+which fixes `N_*`, which fixes the background, so the physics runs pass
+`--n-star auto` to solve that fixed point. A hand-supplied value goes stale
+silently when the reheating model changes, and did: the first release
+computed the spectra at `50.5852` against a converged `50.5966`. The map is
+nearly flat, so `auto` converges in one step. Two sets of runs keep a fixed
+`N_*` deliberately — the `reheat_*` control, which calibrates the shape
+statistic's null by sitting at a different `N_*` than its partner, and the
+`α = 0` and `α = 2` wall-shape comparisons, whose depth Paper I Sec. 5 shows
+is `N_*`-independent.
 
-`--n-star auto` solves the reheating fixed point rather than accepting a
-literal. N_* is not a free input — the background fixes the reheating
-history, which fixes N_*, which fixes the background — so a hand-supplied
-value can go stale when the reheating model changes. It did: the first
-release computed the spectra at `50.5852` against a converged `50.5966`.
-The map is nearly flat, so `auto` converges in one step.
-
-```bash
-```
+**The wall coefficient is derived, not assumed.** Three of the four zero-work
+measures are exact (`3`, `2`, and `2 + 1/p`); the canonical field-space
+measure is a fixed point, `bootstrap.canonical_wall_coefficient(66)`
+`-> 2.809064`.
 
 ## Layout
 

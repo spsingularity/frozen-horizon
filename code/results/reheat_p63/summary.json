@@ -2,6 +2,7 @@
   "bootstrap": {
     "p": 63,
     "q": 246.04954838709676,
+    "alpha": 3.0,
     "wall_coefficient_alpha": 3.0,
     "n_power": 127,
     "m_power": 64,
@@ -45,12 +46,18 @@
   "duration": {
     "H_horizon_over_Mpl": 6.482780513745685e-06,
     "exit_exponent_s": 0.7912878474779199,
-    "classicality_boundary_over_Mpl": 1.3039080115169254e-06,
-    "N_stochastic_mean": 1.1011790759460367,
-    "N_stochastic_std": 0.8244833520062039,
-    "N_classical": 70.88695524454758,
-    "N_total_mean": 71.98813432049361,
-    "N_total_std": 0.8244833520062039
+    "epsilon_coarse_graining": 1.0,
+    "tachyonic_kick_factor": 2.805105782091666,
+    "classicality_boundary_over_Mpl": 3.6575999024217735e-06,
+    "seed_sigma_z": 0.4533940825515691,
+    "N_stochastic_mean": 0.8427787773501523,
+    "N_stochastic_std": 0.821024960820821,
+    "P_seed_outside": 0.02741294471655104,
+    "N_stochastic_sharp_mean": 1.1011790759460367,
+    "N_stochastic_sharp_std": 0.8244833520062039,
+    "N_classical": 69.58348759136003,
+    "N_total_mean": 70.42626636871017,
+    "N_total_std": 0.821024960820821
   },
   "sachs_wolfe": {
     "C2_over_smooth": 0.6358750295825325,
@@ -61,6 +68,7 @@
     "k_pivot_Mpc": 0.05,
     "chi_star_Mpc": 13870.0,
     "n_star": 51.4214,
+    "n_star_mode": "supplied",
     "horizon_offset": 1e-10,
     "k_range": [
       2e-05,

@@ -114,12 +114,19 @@ def fig_clratios():
         (65, GREEN, "--", r"$p=65$ (broad)"),
         (66, BLUE, "-", r"$p=66$ (narrow)"),
     ):
-        cache = ROOT / "results" / f"invwall_p{p}" / "camb_ratio.npz"
-        if not cache.exists():
-            d = np.genfromtxt(ROOT / "results" / f"invwall_p{p}" /
-                              "primordial_power.csv", delimiter=",", names=True)
-            obs = json.loads((ROOT / "results" / f"invwall_p{p}" /
-                              "summary.json").read_text())["observables"]
+        directory = ROOT / "results" / f"invwall_p{p}"
+        cache = directory / "camb_ratio.npz"
+        spectrum = directory / "primordial_power.csv"
+        summary = directory / "summary.json"
+        # Invalidate against the inputs' mtimes. A bare exists() check let
+        # this cache survive a full pipeline re-run, so the figure was drawn
+        # from superseded spectra while every other artifact was updated.
+        stale = (not cache.exists()
+                 or cache.stat().st_mtime < max(spectrum.stat().st_mtime,
+                                                summary.stat().st_mtime))
+        if stale:
+            d = np.genfromtxt(spectrum, delimiter=",", names=True)
+            obs = json.loads(summary.read_text())["observables"]
             ratio, _, _ = boltzmann.feature_ratio(
                 d["k_Mpc"], d["P_R"], obs["n_s"], obs["alpha_s"], lmax=300)
             np.savez(cache, **ratio)

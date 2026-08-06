@@ -106,4 +106,8 @@ seed and the inflationary duration.
 ## License
 
 MIT — see `LICENSE`. If you use this code, please cite the papers and the
-archived release; see `CITATION.cff`.
+archived release:
+
+> Pandev, S. *Frozen-horizon cosmology: pipeline, results, and manuscripts.*
+> Zenodo, [doi:10.5281/zenodo.21829379](https://doi.org/10.5281/zenodo.21829379)
+> (concept DOI — always resolves to the latest version).

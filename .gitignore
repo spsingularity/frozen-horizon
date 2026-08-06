@@ -1,0 +1,41 @@
+# Python environment and caches (reconstruct from code/requirements.txt)
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Planck likelihood data (~16 MB), fetched with:
+#   cobaya-install planck_2018_lowl.TT planck_2018_lowl.EE \
+#       --packages-path code/cobaya_packages
+cobaya_packages/
+
+# Superseded and exploratory runs, kept locally for provenance only.
+# Everything the manuscripts use lives in code/results/.
+_archive/
+
+# Pipeline run logs
+code/results/*.log
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+build.log
+
+# OS
+.DS_Store
+
+# Original exploratory handout package: superseded numbers (p=67, N_*=55)
+# and working notes. The manuscripts in paper/ are the current statement.
+handout/
+
+# Compiled manuscripts (build artifacts; `make` regenerates them).
+# Generated tables and figures ARE tracked so the papers build without Python.
+paper/*.pdf
+paper/paper2/*.pdf

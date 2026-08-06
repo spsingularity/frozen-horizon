@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "Frozen-Horizon Cosmology: calculation code"
+message: "If you use this software, please cite it as below."
+type: software
+abstract: >-
+  Numerical implementation of a metric f(R) cosmology with a high-curvature
+  trace-flow wall, parameterized by a single integer p. Computes the
+  Einstein-frame background, scalar and tensor mode spectra, stochastic exit
+  from the frozen horizon, scalaron reheating, and the resulting CMB angular
+  power spectra through CAMB.
+authors:
+  - family-names: Pandev
+    given-names: Stilian
+    email: stilianpandev@gmail.com
+    affiliation: Independent researcher
+license: MIT
+keywords:
+  - cosmology
+  - inflation
+  - f(R) gravity
+  - cosmic microwave background
+  - primordial power spectrum

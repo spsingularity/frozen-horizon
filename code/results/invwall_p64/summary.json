@@ -1,0 +1,72 @@
+{
+  "bootstrap": {
+    "p": 64,
+    "q": 237.85695205699287,
+    "alpha": 2.809646,
+    "wall_coefficient_alpha": 2.809646,
+    "n_power": 129,
+    "m_power": 65,
+    "horizon_slope_F_H": 81.272448,
+    "mu_squared": 3.0,
+    "exit_exponent_s": 0.7912878474779199,
+    "horizon_residual": 3.637978807091713e-12
+  },
+  "background": {
+    "N_span_from_offset_start": 78.94960249109806,
+    "end_N": 78.94960249109806,
+    "pivot_N": 28.364402491098062,
+    "n_star": 50.5852,
+    "x_pivot": 210.45076271816058,
+    "M_over_Mpl_slowroll": 1.3527004288010462e-05,
+    "H_pivot_over_Mpl": 6.668740900287703e-06,
+    "min_f_R": 1.651782024253785,
+    "min_M2_f_RR": 0.29106861163705805,
+    "ns_first_order": 0.9637371902563355,
+    "r_first_order": 0.004291012877730087,
+    "epsilon_pivot": 0.0002681883048581304
+  },
+  "observables": {
+    "n_s": 0.9667925995799137,
+    "alpha_s": -0.006525776970117853,
+    "A_s_raw": 2.1571773204995863e-09,
+    "r": 0.0041785105705960945,
+    "M_over_Mpl_corrected": 1.3346529546052798e-05,
+    "fit_spacing": 0.03,
+    "fit_half_points": 2,
+    "fit_degree": 2
+  },
+  "notch": {
+    "notch_depth": 0.5167558624333957,
+    "notch_k_over_kpivot": 0.012084780289427804,
+    "notch_k_Mpc": 0.0006042390144713902,
+    "grid_min_depth": 0.5177026648204104,
+    "grid_min_k_over_kpivot": 0.012495427811985768,
+    "tensor_max_deviation": 0.0021890972335228964
+  },
+  "duration": {
+    "H_horizon_over_Mpl": 6.591192311863148e-06,
+    "exit_exponent_s": 0.7912878474779199,
+    "classicality_boundary_over_Mpl": 1.3257133174051297e-06,
+    "N_stochastic_mean": 1.1011790759460367,
+    "N_stochastic_std": 0.8244833520062039,
+    "N_classical": 68.96176696570949,
+    "N_total_mean": 70.06294604165552,
+    "N_total_std": 0.8244833520062039
+  },
+  "sachs_wolfe": {
+    "C2_over_smooth": 2.7090699325058747,
+    "C3_over_smooth": 1.3171000342608359
+  },
+  "inputs": {
+    "A_s_obs": 2.1e-09,
+    "k_pivot_Mpc": 0.05,
+    "chi_star_Mpc": 13870.0,
+    "n_star": 50.5852,
+    "horizon_offset": 1e-10,
+    "k_range": [
+      2e-05,
+      10.0,
+      160
+    ]
+  }
+}

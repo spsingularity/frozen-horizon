@@ -1,0 +1,8 @@
+numpy>=1.26
+scipy>=1.11
+camb>=1.5
+pytest>=7.4
+
+# only needed to rebuild the original DOCX handout in legacy/
+python-docx>=1.1
+Pillow>=10.0

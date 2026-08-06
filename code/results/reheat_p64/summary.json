@@ -1,0 +1,71 @@
+{
+  "bootstrap": {
+    "p": 64,
+    "q": 250.0487439070116,
+    "wall_coefficient_alpha": 3.0,
+    "n_power": 129,
+    "m_power": 65,
+    "horizon_slope_F_H": 85.33333333333333,
+    "mu_squared": 3.0,
+    "exit_exponent_s": 0.7912878474779199,
+    "horizon_residual": -0.0
+  },
+  "background": {
+    "N_span_from_offset_start": 81.8269918362007,
+    "end_N": 81.8269918362007,
+    "pivot_N": 30.405791836200706,
+    "n_star": 51.4212,
+    "x_pivot": 213.81546047507862,
+    "M_over_Mpl_slowroll": 1.3298357747506773e-05,
+    "H_pivot_over_Mpl": 6.557459927153008e-06,
+    "min_f_R": 1.6517820242504162,
+    "min_M2_f_RR": 0.28736676591855487,
+    "ns_first_order": 0.9618403915710688,
+    "r_first_order": 0.0041490121349446385,
+    "epsilon_pivot": 0.0002593132584340399
+  },
+  "observables": {
+    "n_s": 0.9631143985328793,
+    "alpha_s": -0.0013940652589124207,
+    "A_s_raw": 2.159330020849799e-09,
+    "r": 0.004036210267552284,
+    "M_over_Mpl_corrected": 1.3114391609181777e-05,
+    "fit_spacing": 0.03,
+    "fit_half_points": 2,
+    "fit_degree": 2
+  },
+  "notch": {
+    "notch_depth": 0.46773608359468,
+    "notch_k_over_kpivot": 0.0015149946830466795,
+    "notch_k_Mpc": 7.574973415233399e-05,
+    "grid_min_depth": 0.4689593803871183,
+    "grid_min_k_over_kpivot": 0.0014616523364662725,
+    "tensor_max_deviation": 0.00122150665629428
+  },
+  "duration": {
+    "H_horizon_over_Mpl": 6.4805297447482015e-06,
+    "exit_exponent_s": 0.7912878474779199,
+    "classicality_boundary_over_Mpl": 1.303455305194126e-06,
+    "N_stochastic_mean": 1.1011790759460367,
+    "N_stochastic_std": 0.8244833520062039,
+    "N_classical": 71.86055366022546,
+    "N_total_mean": 72.9617327361715,
+    "N_total_std": 0.8244833520062039
+  },
+  "sachs_wolfe": {
+    "C2_over_smooth": 0.762943342989488,
+    "C3_over_smooth": 0.8349117483706507
+  },
+  "inputs": {
+    "A_s_obs": 2.1e-09,
+    "k_pivot_Mpc": 0.05,
+    "chi_star_Mpc": 13870.0,
+    "n_star": 51.4212,
+    "horizon_offset": 1e-10,
+    "k_range": [
+      2e-05,
+      10.0,
+      160
+    ]
+  }
+}

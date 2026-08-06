@@ -1,0 +1,72 @@
+{
+  "bootstrap": {
+    "p": 84,
+    "q": 246.00043286920135,
+    "alpha": 2.0,
+    "wall_coefficient_alpha": 2.0,
+    "n_power": 169,
+    "m_power": 85,
+    "horizon_slope_F_H": 84.0,
+    "mu_squared": 3.0,
+    "exit_exponent_s": 0.7912878474779199,
+    "horizon_residual": 3.637978807091713e-12
+  },
+  "background": {
+    "N_span_from_offset_start": 81.26349592889753,
+    "end_N": 81.26349592889753,
+    "pivot_N": 29.842495928897527,
+    "n_star": 51.421,
+    "x_pivot": 213.81395073969168,
+    "M_over_Mpl_slowroll": 1.329667997287431e-05,
+    "H_pivot_over_Mpl": 6.5566318847375794e-06,
+    "min_f_R": 1.651782024254219,
+    "min_M2_f_RR": 0.3106646244503499,
+    "ns_first_order": 0.9615414241512859,
+    "r_first_order": 0.004147964459690039,
+    "epsilon_pivot": 0.00025924777873062745
+  },
+  "observables": {
+    "n_s": 0.9626162332434905,
+    "alpha_s": -0.0008434412485761404,
+    "A_s_raw": 2.1597101955412813e-09,
+    "r": 0.004034480645624701,
+    "M_over_Mpl_corrected": 1.3111582873366659e-05,
+    "fit_spacing": 0.03,
+    "fit_half_points": 2,
+    "fit_degree": 2
+  },
+  "notch": {
+    "notch_depth": 0.7058484878792299,
+    "notch_k_over_kpivot": 0.002441010271844613,
+    "notch_k_Mpc": 0.00012205051359223066,
+    "grid_min_depth": 0.7067406130869592,
+    "grid_min_k_over_kpivot": 0.00236255933507528,
+    "tensor_max_deviation": 0.0017886802122000223
+  },
+  "duration": {
+    "H_horizon_over_Mpl": 6.477281830851939e-06,
+    "exit_exponent_s": 0.7912878474779199,
+    "classicality_boundary_over_Mpl": 1.3028020390622441e-06,
+    "N_stochastic_mean": 1.1011790759460367,
+    "N_stochastic_std": 0.8244833520062039,
+    "N_classical": 71.29769651033557,
+    "N_total_mean": 72.3988755862816,
+    "N_total_std": 0.8244833520062039
+  },
+  "sachs_wolfe": {
+    "C2_over_smooth": 0.8401636941562024,
+    "C3_over_smooth": 0.882329140554543
+  },
+  "inputs": {
+    "A_s_obs": 2.1e-09,
+    "k_pivot_Mpc": 0.05,
+    "chi_star_Mpc": 13870.0,
+    "n_star": 51.421,
+    "horizon_offset": 1e-10,
+    "k_range": [
+      2e-05,
+      10.0,
+      100
+    ]
+  }
+}

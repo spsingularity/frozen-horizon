@@ -115,26 +115,61 @@ def classicalizing_thimble(mu2=MU2, v_end=14.0):
     }
 
 
-#: Normalizability threshold of the classicalizing Born measure.
-#: Requiring cos(2 theta) < 0 fails below mu^2 = 7/4, which is exactly where
-#: 9 + 4 mu^2 = 16, i.e. s = 1/2. The Lorentzian exponents are s and -(3+s),
-#: differing by 2s+3; over the one-negative-mode window 0 < mu^2 < 4 that
-#: difference runs over (3,5), so mu^2 = 7/4 is the unique interior value at
-#: which the mode equation degenerates. The one-negative-mode condition is
-#: therefore necessary but NOT sufficient for a normalizable classicalizing
-#: state: 7/4 < mu^2 < 4 is required. The unit gap mu^2 = d - 1 = 3 lies
+#: Normalizability threshold of the classicalizing Born measure, theta = 45 deg.
+#: From theta = pi s / 2 (see theta_exact) this is s = 1/2, i.e. mu^2 = 7/4.
+#: The one-negative-mode condition 0 < mu^2 < 4 is therefore necessary but NOT
+#: sufficient: 7/4 < mu^2 < 4 is required. The unit gap mu^2 = d - 1 = 3 lies
 #: inside this range.
 MU2_NORMALIZABLE_MIN = 7.0 / 4.0
 
 
+def growth_exponent(mu2=MU2):
+    """Late-time Lorentzian growth exponent s, the positive root of s(s+3)=mu^2."""
+    return 0.5 * (np.sqrt(9.0 + 4.0 * mu2) - 3.0)
+
+
+def theta_exact(mu2=MU2):
+    """Classicalizing contour angle in closed form: theta = pi s / 2.
+
+    Both mode equations are hypergeometric. Substituting s = sinh(v) in the
+    Lorentzian equation F'' + 3 tanh(v) F' - mu^2 F = 0 and then w = -s^2 gives
+
+        w(1-w) F_ww + [1/2 - (5/2) w] F_w + (mu^2/4) F = 0,
+
+    i.e. a = (s+3)/2, b = -s/2, c = 1/2 with s(s+3) = mu^2. The large-|w|
+    connection coefficients of the even and odd equatorial solutions give
+
+        c2/c1 = (1/2) G((s+3)/2) G((s+1)/2) / [ G((s+4)/2) G((s+2)/2) ].
+
+    The Euclidean equation is the same one at x = cos(u): the Gegenbauer
+    equation (1-x^2) f'' - 4 x f' + mu^2 f = 0, whose solution regular at the
+    pole is C^{3/2}_s. Killing the singular (1-x^2)^{-1} branch fixes
+
+        r_E = 2 G((s+4)/2) G((1-s)/2) / [ G((s+3)/2) G(-s/2) ] .
+
+    In the product |r_E| c2/c1 every Gamma cancels pairwise, and the two
+    reflection formulae G((1-s)/2)G((1+s)/2) = pi/cos(pi s/2) and
+    |G(-s/2)|G(1+s/2) = pi/sin(pi s/2) collapse the rest to tan(pi s / 2).
+    Hence theta = arctan(|r_E| c2/c1) = pi s / 2 identically, and the
+    normalizability condition cos(2 theta) < 0 is simply s > 1/2.
+
+    This is exact; classicalizing_thimble() integrates the same quantity
+    numerically and the two agree to ~1e-11 degrees (see the tests).
+    """
+    return 0.5 * np.pi * growth_exponent(mu2)
+
+
 def normalizability_window(mu2=MU2):
     """Whether a normalizable classicalizing contour exists at this mu^2."""
+    s = growth_exponent(mu2)
     return {
         "mu2": mu2,
         "one_negative_mode": 0.0 < mu2 < 4.0,
         "normalizable": MU2_NORMALIZABLE_MIN < mu2 < 4.0,
         "threshold": MU2_NORMALIZABLE_MIN,
-        "exponent_gap": 2.0 * (np.sqrt(9.0 + 4.0 * mu2) - 3.0) / 2.0 + 3.0,
+        "growth_exponent": float(s),
+        "theta_deg": float(np.degrees(theta_exact(mu2))),
+        "cos_2theta": float(np.cos(np.pi * s)),
     }
 
 

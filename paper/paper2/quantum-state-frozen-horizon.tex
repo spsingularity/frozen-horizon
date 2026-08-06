@@ -9,7 +9,6 @@
 
 \newcommand{\Mpl}{M_{\rm Pl}}
 \newcommand{\Mpc}{\,{\rm Mpc}^{-1}}
-\newcommand{\HH}{H_H}
 
 \journalname{Eur. Phys. J. C}
 
@@ -35,17 +34,18 @@ requires $0<\mu^2<4$. We show that this
 condition is necessary but not sufficient. Continuing the unstable direction
 through the equator and demanding that the growing Lorentzian branch be real
 selects a unique complex contour, rotated by an angle $\theta(\mu^2)$; the
-Born measure along it is normalizable only when $\cos2\theta<0$, which fails
-below $\mu^2=7/4$. The threshold is exact and structural: at $\mu^2=7/4$ the
-growth exponent is $s=1/2$, so the two Lorentzian exponents $s$ and $-(3+s)$
-differ by an integer, and this is the unique degeneracy of the mode equation
-interior to the one-negative-mode window. Admissible tachyonic horizons
-therefore satisfy $7/4<\mu^2<4$. We develop the state of such a saddle in
+Born measure along it is normalizable only when $\cos2\theta<0$. Both mode
+equations are hypergeometric, and the connection coefficients reduce through
+the Gamma reflection formulae to the closed form $\theta=\pi s/2$, where
+$s=\tfrac12[\sqrt{9+4\mu^2}-3]$ is the growth exponent. Normalizability is
+therefore exactly the condition $s>1/2$, and admissible tachyonic horizons
+satisfy $7/4<\mu^2<4$. We develop the state of such a saddle in
 detail at the unit spectral gap $\mu^2=d-1=3$: the boundary kernel is
 computed mode by mode and confirms that the homogeneous direction is the sole
 negative eigenvalue while all inhomogeneous scalar and physical tensor
 harmonics are Gaussian suppressed; the classicalizing contour lies at
-$\theta=71.216^\circ$; and the background lapse integral, performed exactly
+$\theta=\tfrac{\pi}{4}(\sqrt{21}-3)=71.216^\circ$; and the background lapse
+integral, performed exactly
 under a Neumann regularity condition, retains both Hartle--Hawking saddles
 with nonvanishing intersection numbers while eliminating the tunneling pair.
 Scalar and metric perturbations decouple at quadratic order, so the joint
@@ -70,10 +70,12 @@ scalaron is tachyonic there, with $m_H^2=-\mu^2H_H^2$, the solution is
 unstable and its Euclidean continuation is a regular compact four-sphere: the
 $f(R)$ counterpart of a Hawking--Moss saddle \cite{HawkingMoss1982}, and a
 candidate origin for an inflationary history that begins at finite size
-rather than at a singularity. Constructions of this kind have a long
-lineage, from the original anomaly-supported de Sitter stage of $R^2$
-inflation \cite{Starobinsky1980,Vilenkin1985} to the local polynomial
-realization analyzed in the companion paper \cite{PandevI}.
+rather than at a singularity, in the sense of the no-boundary proposal
+\cite{HartleHawking1983}. Constructions of this kind have a long lineage,
+from the original anomaly-supported de Sitter stage of $R^2$ inflation
+\cite{Starobinsky1980,Vilenkin1985} through the Euclidean quantum cosmology
+of higher-derivative gravity \cite{HawkingLuttrell1984}, to the local
+polynomial realization analyzed in the companion paper \cite{PandevI}.
 
 A classical saddle, however, does not determine the quantum state built upon
 it. The integration contour over the unstable direction is additional
@@ -94,17 +96,18 @@ treatment is general: every quantity computed below depends on the theory
 only through $\mu^2$, so the results apply to any such horizon and are
 independent of the particular curvature function that produces it. The
 admissibility of the saddle as a decay channel requires exactly one negative
-mode, which bounds $0<\mu^2<4$. Our principal result is that this condition
+mode \cite{ColemanDeLuccia1980}, which bounds $0<\mu^2<4$. Our principal
+result is that this condition
 is not sufficient. Requiring the growing Lorentzian branch to be real fixes
 the contour uniquely, and the Born measure along it is normalizable only for
 \begin{equation}
 \frac{7}{4}<\mu^2<4 .
 \label{eq:window}
 \end{equation}
-The lower threshold is exact and has a structural origin, given in
-Sec.~\ref{sec:thimble}: it is the unique point interior to the
-one-negative-mode window at which the two Lorentzian exponents differ by an
-integer, and hence at which the mode equation degenerates. A substantial
+The lower threshold is exact rather than numerical. Section~\ref{sec:thimble}
+shows that the contour angle has the closed form $\theta=\pi s/2$, where
+$s=\tfrac12[\sqrt{9+4\mu^2}-3]$ is the growth exponent of the unstable mode,
+so that normalizability is precisely the condition $s>1/2$. A substantial
 part of the naively admissible range is therefore excluded on
 quantum-mechanical grounds.
 
@@ -185,9 +188,12 @@ in Sec.~\ref{sec:discussion}.
 
 We note one numerical point, since it is easy to encounter and silent when
 it occurs. Imposing the regular behaviour literally as
-$f_n(u_0)=u_0^{\,n}$ underflows the absolute tolerance of a standard
-integrator for $n\gtrsim6$, after which the solution is numerical noise
-rather than the regular mode. All results here normalize $f_n(u_0)=1$
+$f_n(u_0)=u_0^{\,n}$ starts the integration below the absolute tolerance of a
+standard adaptive solver once $n\gtrsim6$: with $u_0=10^{-6}$ and
+$\mathrm{atol}=10^{-14}$, the initial amplitude $u_0^{\,7}=10^{-42}$ is
+twenty-eight orders of magnitude beneath the error control, and the returned
+solution is numerical noise rather than the regular mode. All results here
+normalize $f_n(u_0)=1$
 instead, which is equivalent by linearity of Eq.~(\ref{eq:euclid}) and keeps
 amplitudes of order unity throughout.
 
@@ -243,23 +249,72 @@ state is normalizable if and only if
 \end{equation}
 
 \subsection{The admissible window}
-Condition~(\ref{eq:normcond}) is not automatic. Evaluating $\theta(\mu^2)$
-across the one-negative-mode range shows that it is violated at small
-$\mu^2$ and satisfied at large $\mu^2$, with the crossing at
+Condition~(\ref{eq:normcond}) is not automatic, and $\theta$ can be obtained
+in closed form. Let $s$ denote the late-time growth exponent, the positive
+root of
 \begin{equation}
-\boxed{\;\mu^2_{\rm crit}=\frac74\;}
+s(s+3)=\mu^2,
+\qquad
+s=\tfrac12\!\left[\sqrt{9+4\mu^2}-3\right],
+\label{eq:sdef}
+\end{equation}
+so that the two Lorentzian exponents of Eq.~(\ref{eq:lorentz}) are $s$ and
+$-(3+s)$. Both mode equations are hypergeometric. Substituting
+$\varsigma=\sinh v$ in Eq.~(\ref{eq:lorentz}) and then $w=-\varsigma^2$ gives
+\begin{equation}
+w(1-w)\,F_{ww}+\left[\tfrac12-\tfrac52w\right]F_w+\tfrac14\mu^2F=0,
+\label{eq:hyper}
+\end{equation}
+with parameters $a=(s+3)/2$, $b=-s/2$, $c=1/2$. The even and odd equatorial
+solutions are $F_+={}_2F_1(a,b;\tfrac12;w)$ and
+$F_-=\varsigma\,{}_2F_1(a+\tfrac12,b+\tfrac12;\tfrac32;w)$, and the standard
+large-$|w|$ connection formula \cite{DLMF} projects each onto the growing
+branch $\varsigma^{\,s}$, giving
+\begin{equation}
+\frac{c_2}{c_1}
+=\frac12\,
+\frac{\Gamma\!\left(\frac{s+3}{2}\right)\Gamma\!\left(\frac{s+1}{2}\right)}
+     {\Gamma\!\left(\frac{s+4}{2}\right)\Gamma\!\left(\frac{s+2}{2}\right)} .
+\label{eq:cratio}
+\end{equation}
+The Euclidean equation is the same equation at $x=\cos u$, namely the
+Gegenbauer equation $(1-x^2)f''-4xf'+\mu^2f=0$ of index $3/2$ and degree $s$.
+Its indicial exponents at the pole are $0$ and $-2$; requiring the regular
+one, that is demanding that the coefficient of the singular
+$(1-x^2)^{-1}$ branch vanish, fixes the equatorial logarithmic derivative to
+\begin{equation}
+r_E=2\,
+\frac{\Gamma\!\left(\frac{s+4}{2}\right)\Gamma\!\left(\frac{1-s}{2}\right)}
+     {\Gamma\!\left(\frac{s+3}{2}\right)\Gamma\!\left(-\frac{s}{2}\right)} ,
+\label{eq:rE}
+\end{equation}
+which is negative for $0<s<1$. In the product $|r_E|\,c_2/c_1$ every Gamma
+function cancels pairwise, and the two reflection formulae
+$\Gamma(\frac{1-s}{2})\Gamma(\frac{1+s}{2})=\pi/\cos(\pi s/2)$ and
+$|\Gamma(-\frac{s}{2})|\Gamma(1+\frac{s}{2})=\pi/\sin(\pi s/2)$ reduce the
+remainder to a single tangent. Hence
+\begin{equation}
+\boxed{\;\theta=\arctan\!\left(|r_E|\frac{c_2}{c_1}\right)=\frac{\pi s}{2}\;}
+\label{eq:thetaexact}
+\end{equation}
+identically in $\mu^2$, and $\cos2\theta=\cos(\pi s)$. Direct numerical
+integration of the two mode equations reproduces Eq.~(\ref{eq:thetaexact}) to
+$10^{-11}$ degrees across the window.
+
+The normalizability condition~(\ref{eq:normcond}) is therefore simply
+$s>1/2$, and by Eq.~(\ref{eq:sdef}) that is
+\begin{equation}
+\mu^2>\mu^2_{\rm crit}=\tfrac12\cdot\tfrac72=\frac74 ,
 \label{eq:crit}
 \end{equation}
-where $\theta=45^\circ$ exactly (Fig.~\ref{fig:window}). The threshold has a
-structural origin. The exponents of Eq.~(\ref{eq:lorentz}) at late times are
-$s$ and $-(3+s)$, where $s(s+3)=\mu^2$, that is
-$s=\tfrac12[\sqrt{9+4\mu^2}-3]$; they differ by $2s+3$. At $\mu^2=7/4$ the
-discriminant becomes a perfect square, $9+4\mu^2=16$, giving $s=1/2$ and
-exponent difference exactly $4$. Over the open window $0<\mu^2<4$ the
-difference $2s+3$ runs over $(3,5)$, so $\mu^2=7/4$ is the \emph{unique}
-interior value at which the two exponents differ by an integer and the mode
-equation degenerates. The loss of normalizability coincides with that
-degeneracy.
+with $\theta=45^\circ$ at the threshold (Fig.~\ref{fig:window}). The bound is
+exact rather than numerical: it is the first zero of $\cos(\pi s)$, and its
+apparent coincidence with the degeneracy of Eq.~(\ref{eq:lorentz}) at
+$s=1/2$---where the exponents $s$ and $-(3+s)$ differ by the integer $4$, the
+only such point interior to $0<\mu^2<4$---is not accidental, since both
+follow from the poles of the same Gamma functions. At the upper edge
+$\mu^2\to4$ one has $s\to1$ and $\theta\to90^\circ$, so the entire range
+$7/4<\mu^2<4$ is admissible without further condition.
 
 The conclusion is that the one-negative-mode condition, which is the
 standard admissibility criterion for a decay channel, is necessary but not
@@ -270,28 +325,29 @@ terms of the growth rate, the unstable mode must satisfy $s>1/2$.
 \centering
 \includegraphics[width=\columnwidth]{figures/window}
 \caption{Normalizability across the one-negative-mode window. The Born
-measure on the classicalizing contour requires $\cos2\theta<0$, which fails
-in the shaded region below $\mu^2=7/4$---exactly the point at which the two
-Lorentzian exponents differ by an integer. The unit spectral gap $\mu^2=3$
-lies inside the admissible range.}
+measure on the classicalizing contour requires $\cos2\theta=\cos(\pi s)<0$,
+which fails in the shaded region below $\mu^2=7/4$, the value at which the
+growth exponent reaches $s=1/2$. The unit spectral gap $\mu^2=3$ lies inside
+the admissible range.}
 \label{fig:window}
 \end{figure}
 
 \subsection{The state at the unit spectral gap}
-At $\mu^2=d-1=3$ the construction gives $r_E=-6.27855862$,
-$c_1=1.15455467$ and $c_2=0.54066085$, hence
+At $\mu^2=d-1=3$ the growth exponent is $s=\tfrac12(\sqrt{21}-3)$, and
+Eq.~(\ref{eq:thetaexact}) gives the contour angle in closed form,
 \begin{equation}
-\theta=71.215906^\circ,
-\qquad
-\cos2\theta=-0.79262829,
+\theta=\frac{\pi}{4}\!\left(\sqrt{21}-3\right)=71.215906^\circ,
 \end{equation}
-so the contour is both classicalizing and convergent
+so that $\cos2\theta=-0.79262829$. Numerical integration of the two mode
+equations gives $r_E=-6.27855862$, $c_1=1.15455467$ and $c_2=0.54066085$,
+in agreement. The contour is thus both classicalizing and convergent
 (Fig.~\ref{fig:thimble}). With $K_0H_H^2=-123.9338$ the Born widths of the
 equatorial amplitude and of the real growing coefficient are
 \begin{equation}
 \frac{\sigma_Y}{H_H}=0.07134,
 \qquad
 \frac{\sigma_{C_g}}{H_H}=0.25581,
+\label{eq:widths}
 \end{equation}
 the latter following from
 $\operatorname{Re}\ln\Psi(C_g)=-\tfrac12\kappa_CC_g^2/H_H^2$ with
@@ -305,7 +361,8 @@ gives the real part of the exponent, positive (divergent) along the real
 axis. The steepest-descent direction of the boundary kernel is purely
 imaginary; requiring the growing Lorentzian branch to be real instead selects
 the contour at $\theta=71.216^\circ$, along which the measure is
-normalizable.}
+normalizable. The diagonals are the null lines $\cos2\theta=0$ separating
+convergent from divergent directions.}
 \label{fig:thimble}
 \end{figure}
 
@@ -320,13 +377,18 @@ no contradiction, because the contours being tested are not the same;
 the point is that classicalization must be established for the contour
 actually used, and Eq.~(\ref{eq:theta}) does so by construction.
 
-Second, the linear treatment is self-consistent in the region carrying
-probability. For the worked example of the companion paper, the cubic term
-of the local potential expansion produces a force smaller than the linear
-force by a factor of $3\times10^{-6}$ at the drift threshold, and the
-amplitude at which the cubic and linear forces become comparable lies at
-$-\ln P\simeq2\times10^{10}$ in the Born measure. Nonlinear bending of the
-contour is therefore negligible wherever the state has support.
+Second, the linear treatment must be self-consistent in the region carrying
+probability. This is the one point at which the analysis is not governed by
+$\mu^2$ alone: with $W_3$ the cubic coefficient of the potential expanded
+about the horizon, the cubic force exceeds the linear one only above
+$\delta\phi\sim\mu^2H_H^2/|W_3|$, and self-consistency requires that
+amplitude to lie far into the tail of the Born measure of
+Eq.~(\ref{eq:widths}). Whether it does is a property of the particular
+curvature function. For the worked example of the companion paper the ratio
+of cubic to linear force is $3\times10^{-6}$ at the drift threshold, and the
+crossover amplitude lies at $-\ln P\simeq2\times10^{10}$, so nonlinear
+bending of the contour is negligible wherever the state has support; a
+different wall would require the same check to be repeated.
 
 \section{The lapse contour}
 \label{sec:lapse}
@@ -355,7 +417,8 @@ closed de Sitter problem, because
 $\nabla_\mu\phi_H=0$, $U_{,\phi}(\phi_H)=0$ and $U(\phi_H)=3\Mpl^2H_H^2$.
 In the parametrization $ds^2=-(N^2/q)\,dt^2+q\,d\Omega_3^2$ with
 Eq.~(\ref{eq:neumann}) and a final size $q(1)=q_1$, integrating out $q(t)$
-gives the exact lapse action (in units $8\pi G=1$)
+gives the exact lapse action, here and in Eq.~(\ref{eq:saddles}) alone
+written in units $8\pi G=1$,
 \begin{equation}
 \frac{S_0(N)}{V_3}=H_H^4N^3+3iH_H^2N^2-3H_H^2q_1N-3iq_1 ,
 \end{equation}
@@ -364,7 +427,8 @@ whose only saddles are
 N_\pm=\pm\frac{\sqrt{H_H^2q_1-1}}{H_H^2}-\frac{i}{H_H^2} .
 \label{eq:saddles}
 \end{equation}
-These are the expanding and contracting Hartle--Hawking saddles; the two
+These are the expanding and contracting Hartle--Hawking saddles
+\cite{HartleHawking1983}; the two
 tunneling saddles carrying $+i/H_H^2$ are absent. Picard--Lefschetz flow
 deforms the full real lapse line into $\mathbb{R}_N\sim\mathcal{J}_-+
 \mathcal{J}_+$, so both retained saddles have nonvanishing intersection
@@ -376,9 +440,11 @@ quadratic order. Every mixed term in the Hessian carries either
 $\nabla_\mu\phi_H$ or $U_{,\phi}(\phi_H)$, and both vanish at a frozen
 horizon, so
 \begin{equation}
+\begin{aligned}
 \delta^2I_E=\delta^2I_{E,\rm grav}
-+\frac12\int d^4x\sqrt{g_H}\,\delta\phi
-\left(-\Box_H+U_{,\phi\phi}(\phi_H)\right)\delta\phi .
++\frac12\int &d^4x\sqrt{g_H}\,\delta\phi\\
+&\times\left(-\Box_H+U_{,\phi\phi}(\phi_H)\right)\delta\phi .
+\end{aligned}
 \end{equation}
 Integrating the Gaussian lapse and metric fluctuations therefore cannot
 alter the scalar kernel of Sec.~\ref{sec:kernel} or the contour phase of
@@ -418,9 +484,10 @@ harmonic $n$ crosses the Hubble scale when $\sinh v_n=\sqrt{n(n+2)}$. Since
 $\cosh(\operatorname{arsinh}x)=\sqrt{1+x^2}$, the crossing times are exactly
 \begin{equation}
 \boxed{\;
-v_n=\operatorname{arsinh}\sqrt{n(n+2)},
-\qquad
-N_n=\ln\frac{a(v_n)}{a(0)}=\ln(n+1).\;}
+\begin{aligned}
+v_n&=\operatorname{arsinh}\sqrt{n(n+2)},\\
+N_n&=\ln\frac{a(v_n)}{a(0)}=\ln(n+1).
+\end{aligned}\;}
 \label{eq:staircase}
 \end{equation}
 No inhomogeneous mode crosses during the first $\ln2=0.693$ scale-factor
@@ -439,19 +506,24 @@ local variance added when shell $n$ enters the long-wavelength sector is
 \end{equation}
 Table~\ref{tab:shells} gives the result. Defining an effective noise
 amplitude by comparison with the continuum,
-$Q^{\rm eff}_n=4\pi^2\Delta V_n/[H_H^2(N_n-N_{n-1})]$, the sequence
-approaches the continuum horizon-crossing value $Q_\nu(1)=7.8686$ from above
-and has converged to better than one percent by the eighth shell
-(Fig.~\ref{fig:shells}). The agreement in the limit validates the
-normalization of Eq.~(\ref{eq:shellvar}).
+$Q^{\rm eff}_n=4\pi^2\Delta V_n/[H_H^2(N_n-N_{n-1})]$, the sequence falls
+steeply from the first shell, crosses the continuum horizon-crossing value
+$Q_\nu(1)=7.8686$ between the fourth and fifth shells, and then undershoots
+it, reaching a minimum near $Q^{\rm eff}_n/Q_\nu(1)\simeq0.975$ around
+$n\simeq10$ before returning slowly from below; the deficit is still
+$2.5\%$ at $n=8$ and falls within one percent only beyond $n\simeq40$
+(Fig.~\ref{fig:shells}). The approach to the continuum value in the limit
+validates the normalization of Eq.~(\ref{eq:shellvar}); the non-monotonic
+approach is itself a discreteness effect and is not resolved by the
+continuum treatment.
 \input{tables/shells.tex}
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figures/shells}
 \caption{Effective noise amplitude injected by each $S^3$ shell, against
-shell index and crossing time. The sequence converges rapidly to the
-continuum value, but the first shell exceeds it by a factor of three,
-precisely in the epoch where the exit occurs.}
+shell index and crossing time. The sequence falls steeply and crosses the
+continuum value near the fourth shell, but the first shell exceeds it by a
+factor of three, precisely in the epoch where the exit occurs.}
 \label{fig:shells}
 \end{figure}
 
@@ -488,8 +560,10 @@ Q_\nu(\epsilon)=\frac{\pi}{2}\epsilon^3\left|H^{(1)}_\nu(\epsilon)\right|^2,
 with $\nu=\sqrt{9/4+\mu^2}$. At $\mu^2=3$ this is $\nu=\sqrt{21}/2$ and
 $\sqrt{Q_\nu(1)}=2.805$ at horizon crossing, so the massless expression
 $H_H/2\pi$ underestimates the kick by nearly a factor of three. The
-classicality boundary at which drift overtakes noise is
-$X_c=\sigma_\epsilon/s$.
+classicality boundary is the displacement at which the deterministic drift
+per e-fold, $sX$, first exceeds the noise accumulated in the same interval,
+$\sigma_\epsilon$; beyond it the trajectory rolls rather than diffuses, so
+the exit threshold is $X_c=\sigma_\epsilon/s$.
 
 Two features distinguish the present treatment from a standard
 Ornstein--Uhlenbeck escape. First, the initial condition is not sharp: the
@@ -546,9 +620,10 @@ $N_{\rm tot}$ the total duration. Both are model-dependent, and we take them
 from the worked example of the companion paper: $N_*=50.585$ and
 $N_{\rm tot}=74.403$ with $k_*=0.05\Mpc$. The first shell then lies at
 \begin{equation}
-k_{n=1}\simeq4.5\times10^{-12}\Mpc,
-\qquad
-\ell_{n=1}\sim k_{n=1}\chi_*\simeq6\times10^{-8},
+\begin{aligned}
+k_{n=1}&\simeq4.5\times10^{-12}\Mpc,\\
+\ell_{n=1}&\sim k_{n=1}\chi_*\simeq6\times10^{-8},
+\end{aligned}
 \end{equation}
 which is smaller than the present horizon scale by some eight orders of
 magnitude. At the wall-induced feature of the companion paper,
@@ -598,9 +673,9 @@ $\epsilon$, which at present is mild but not absent.
 
 Set against these, the window $7/4<\mu^2<4$ appears robust. It follows from
 the reality requirement and the normalizability condition alone, both of
-which are properties of the quadratic theory, and its lower edge coincides
-with an exact degeneracy of the mode equation rather than with a numerical
-accident. The result constrains model building directly: a construction
+which are properties of the quadratic theory, and its lower edge is fixed
+analytically by Eq.~(\ref{eq:thetaexact}) rather than located numerically.
+The result constrains model building directly: a construction
 that places a tachyonic horizon at $\mu^2\le7/4$ does not admit a
 normalizable classicalizing state of the kind derived here, whatever
 curvature function produces the horizon. That the unit spectral gap
@@ -621,10 +696,15 @@ only for $7/4<\mu^2<4$. The one-negative-mode condition $0<\mu^2<4$, which is
 the standard admissibility criterion for a decay channel, is therefore
 necessary but not sufficient.
 
-\item The threshold is exact and structural. At $\mu^2=7/4$ the growth
-exponent is $s=1/2$, so the Lorentzian exponents $s$ and $-(3+s)$ differ by
-exactly four; this is the unique point interior to the one-negative-mode
-window at which they differ by an integer and the mode equation degenerates.
+\item The contour angle is available in closed form. Both mode equations are
+hypergeometric---the Euclidean one is the Gegenbauer equation of index $3/2$
+and degree $s$---and in the ratio that defines $\theta$ every Gamma function
+cancels, leaving $\theta=\pi s/2$ exactly, with
+$s=\tfrac12[\sqrt{9+4\mu^2}-3]$. The threshold is then the first zero of
+$\cos(\pi s)$, at $s=1/2$. It coincides with the unique degeneracy of the
+mode equation interior to the window, where the exponents $s$ and $-(3+s)$
+differ by the integer four, both features originating in the poles of the
+same Gamma functions.
 
 \item At the unit spectral gap $\mu^2=3$ the boundary kernel has the Morse
 structure required of a decay channel: the homogeneous mode is the sole

@@ -75,9 +75,10 @@ def table_shells(max_n=8):
         r"\caption{Discrete $S^3$ shell crossings. Harmonic $n$ enters the"
         r" long-wavelength sector at $N_n=\ln(n+1)$ exactly, injecting"
         r" variance $\Delta V_n$. The effective noise amplitude"
-        r" $Q_n^{\rm eff}$ approaches the continuum value"
-        rf" $Q_\nu(1)={continuum:.4f}$ from above, but the first shell exceeds"
-        r" it by a factor of three.}",
+        r" $Q_n^{\rm eff}$ falls steeply and crosses the continuum value"
+        rf" $Q_\nu(1)={continuum:.4f}$ between the fourth and fifth shells,"
+        r" undershooting it by $2.5\%$ at $n=8$; the first shell exceeds it"
+        r" by a factor of three.}",
         r"\label{tab:shells}", r"\end{table}", "",
     ]
     (OUT / "tables" / "shells.tex").write_text("\n".join(lines))

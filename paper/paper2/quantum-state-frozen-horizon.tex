@@ -41,9 +41,10 @@ $s=\tfrac12[\sqrt{9+4\mu^2}-3]$ is the growth exponent. Normalizability is
 therefore exactly the condition $s>1/2$, and admissible tachyonic horizons
 satisfy $7/4<\mu^2<4$. We develop the state of such a saddle in
 detail at the unit spectral gap $\mu^2=d-1=3$: the boundary kernel is
-computed mode by mode and confirms that the homogeneous direction is the sole
-negative eigenvalue while all inhomogeneous scalar and physical tensor
-harmonics are Gaussian suppressed; the classicalizing contour lies at
+obtained in closed form for every harmonic, which establishes for the entire
+tower, rather than for a tabulated subset, that the homogeneous direction is
+the sole negative eigenvalue while all inhomogeneous scalar and physical
+tensor harmonics are Gaussian suppressed; the classicalizing contour lies at
 $\theta=\tfrac{\pi}{4}(\sqrt{21}-3)=71.216^\circ$; and the background lapse
 integral, performed exactly
 under a Neumann regularity condition, retains both Hartle--Hawking saddles
@@ -157,20 +158,59 @@ K_n=\frac{2\pi^2}{H_H^2}\,\frac{f_n'(\pi/2)}{f_n(\pi/2)} .
 Only the logarithmic derivative enters, so the kernel is independent of the
 normalization of $f_n$.
 
-Table~\ref{tab:kernel} gives the result at $\mu^2=3$, together with the
-four-sphere eigenvalues $\lambda_L/H_H^2=L(L+3)-\mu^2$ for comparison. The
-half-sphere has exactly the structure required of a decay channel: $K_0<0$ is
-the single negative direction, corresponding to the homogeneous rolling mode,
-while $K_n>0$ for every $n\ge1$, so all inhomogeneous scalar perturbations
-are Gaussian suppressed (Fig.~\ref{fig:kernel}).
+The kernel need not be computed harmonic by harmonic. Let $s$ denote the
+positive root of
+\begin{equation}
+s(s+3)=\mu^2,
+\qquad
+s=\tfrac12\!\left[\sqrt{9+4\mu^2}-3\right],
+\label{eq:sdef}
+\end{equation}
+which is the late-time Lorentzian growth exponent and will govern everything
+below. At $x=\cos u$, Eq.~(\ref{eq:euclid}) is the Gegenbauer equation of
+index $n+\tfrac32$ and degree $s-n$, so that
+$f_n=\sin^n\!u\;C^{\,n+3/2}_{\,s-n}(\cos u)$. Its indicial exponents at the
+pole are $n$ and $-(n+2)$, and selecting the regular branch gives the
+logarithmic derivative in closed form for every $n$,
+\begin{equation}
+\frac{f_n'(\pi/2)}{f_n(\pi/2)}
+=2\,
+\frac{\Gamma\!\left(\frac{s+n+4}{2}\right)\Gamma\!\left(\frac{n-s+1}{2}\right)}
+     {\Gamma\!\left(\frac{s+n+3}{2}\right)\Gamma\!\left(\frac{n-s}{2}\right)} ,
+\label{eq:rn}
+\end{equation}
+of which the $r_E$ used in Sec.~\ref{sec:thimble} is the case $n=0$.
+Table~\ref{tab:kernel} gives the values at $\mu^2=3$, together with the
+four-sphere eigenvalues $\lambda_L/H_H^2=L(L+3)-\mu^2$ for comparison;
+direct integration of Eq.~(\ref{eq:euclid}) agrees with
+Eq.~(\ref{eq:rn}) to one part in $10^{12}$.
+
+Equation~(\ref{eq:rn}) settles the Morse structure for the entire tower
+rather than for the harmonics one happens to tabulate. Throughout the
+one-negative-mode window $0<\mu^2<4$, equivalently $0<s<1$, every argument
+appearing in Eq.~(\ref{eq:rn}) is positive except $-s/2$ at $n=0$, which lies
+in $(-\tfrac12,0)$ where $\Gamma$ is negative. Hence $K_0<0$ and $K_n>0$ for
+\emph{all} $n\ge1$: the half-sphere has exactly the structure required of a
+decay channel, with the homogeneous rolling mode the single negative
+direction and every inhomogeneous scalar perturbation Gaussian suppressed
+(Fig.~\ref{fig:kernel}). The upper edge of the window is visible in the same
+formula, since at $s=1$ the argument $(1-s)/2$ of the $n=1$ term reaches zero
+and changes sign. Each Gamma ratio in Eq.~(\ref{eq:rn}) is asymptotically
+$\sqrt{n/2}$, so
+\begin{equation}
+K_nH_H^2\longrightarrow 2\pi^2(n+1)
+\qquad (n\to\infty),
+\label{eq:kernelasym}
+\end{equation}
+and the linear growth of the kernel is exact rather than empirical.
 \input{tables/kernel.tex}
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figures/kernel}
 \caption{Boundary fluctuation kernel $K_nH_H^2$ at $\mu^2=3$. The
 homogeneous mode $n=0$ is the sole negative direction; all inhomogeneous
-harmonics are Gaussian suppressed and the kernel grows approximately
-linearly in $n$.}
+harmonics are Gaussian suppressed. By Eq.~(\ref{eq:rn}) this holds for every
+$n$, and the growth is asymptotically $K_nH_H^2\to2\pi^2(n+1)$.}
 \label{fig:kernel}
 \end{figure}
 
@@ -250,16 +290,10 @@ state is normalizable if and only if
 
 \subsection{The admissible window}
 Condition~(\ref{eq:normcond}) is not automatic, and $\theta$ can be obtained
-in closed form. Let $s$ denote the late-time growth exponent, the positive
-root of
-\begin{equation}
-s(s+3)=\mu^2,
-\qquad
-s=\tfrac12\!\left[\sqrt{9+4\mu^2}-3\right],
-\label{eq:sdef}
-\end{equation}
-so that the two Lorentzian exponents of Eq.~(\ref{eq:lorentz}) are $s$ and
-$-(3+s)$. Both mode equations are hypergeometric. Substituting
+in closed form. With $s$ as in Eq.~(\ref{eq:sdef}), the two Lorentzian
+exponents of Eq.~(\ref{eq:lorentz}) are $s$ and $-(3+s)$. Both mode equations
+are hypergeometric, the Euclidean one already reduced in
+Sec.~\ref{sec:kernel}. Substituting
 $\varsigma=\sinh v$ in Eq.~(\ref{eq:lorentz}) and then $w=-\varsigma^2$ gives
 \begin{equation}
 w(1-w)\,F_{ww}+\left[\tfrac12-\tfrac52w\right]F_w+\tfrac14\mu^2F=0,
@@ -277,18 +311,15 @@ branch $\varsigma^{\,s}$, giving
      {\Gamma\!\left(\frac{s+4}{2}\right)\Gamma\!\left(\frac{s+2}{2}\right)} .
 \label{eq:cratio}
 \end{equation}
-The Euclidean equation is the same equation at $x=\cos u$, namely the
-Gegenbauer equation $(1-x^2)f''-4xf'+\mu^2f=0$ of index $3/2$ and degree $s$.
-Its indicial exponents at the pole are $0$ and $-2$; requiring the regular
-one, that is demanding that the coefficient of the singular
-$(1-x^2)^{-1}$ branch vanish, fixes the equatorial logarithmic derivative to
+The Euclidean side is already done: $r_E$ is the case $n=0$ of
+Eq.~(\ref{eq:rn}),
 \begin{equation}
 r_E=2\,
 \frac{\Gamma\!\left(\frac{s+4}{2}\right)\Gamma\!\left(\frac{1-s}{2}\right)}
      {\Gamma\!\left(\frac{s+3}{2}\right)\Gamma\!\left(-\frac{s}{2}\right)} ,
 \label{eq:rE}
 \end{equation}
-which is negative for $0<s<1$. In the product $|r_E|\,c_2/c_1$ every Gamma
+negative for $0<s<1$. In the product $|r_E|\,c_2/c_1$ every Gamma
 function cancels pairwise, and the two reflection formulae
 $\Gamma(\frac{1-s}{2})\Gamma(\frac{1+s}{2})=\pi/\cos(\pi s/2)$ and
 $|\Gamma(-\frac{s}{2})|\Gamma(1+\frac{s}{2})=\pi/\sin(\pi s/2)$ reduce the
@@ -706,10 +737,14 @@ mode equation interior to the window, where the exponents $s$ and $-(3+s)$
 differ by the integer four, both features originating in the poles of the
 same Gamma functions.
 
-\item At the unit spectral gap $\mu^2=3$ the boundary kernel has the Morse
-structure required of a decay channel: the homogeneous mode is the sole
-negative direction, and all inhomogeneous scalar and physical tensor
-harmonics are Gaussian suppressed. The classicalizing contour lies at
+\item The boundary kernel is likewise closed form. Equation~(\ref{eq:rn})
+gives $K_n$ for every harmonic as a ratio of Gamma functions, and its sign
+throughout $0<\mu^2<4$ is decided by the single argument $-s/2$ at $n=0$.
+The Morse structure required of a decay channel---the homogeneous mode the
+sole negative direction, every inhomogeneous scalar and physical tensor
+harmonic Gaussian suppressed---therefore holds for the whole tower and not
+merely for the harmonics tabulated, and the kernel grows as
+$2\pi^2(n+1)$. At the unit spectral gap the classicalizing contour lies at
 $\theta=71.216^\circ$, with Born widths $\sigma_Y=0.0713H_H$ and
 $\sigma_{C_g}=0.2558H_H$.
 

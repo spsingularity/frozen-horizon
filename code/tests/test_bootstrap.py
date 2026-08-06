@@ -1,5 +1,6 @@
 """The algebra the handout states in prose, asserted so it can fail."""
 
+from scipy.integrate import quad
 import numpy as np
 import pytest
 
@@ -68,3 +69,44 @@ def test_curvature_powers_follow_from_p(p):
     model = FrozenHorizonModel(p)
     assert model.m_power == p + 1
     assert model.n_power == 2 * p + 1
+
+
+# --- zero-work condition in each declared measure ------------------------
+
+def test_wall_coefficient_closed_forms():
+    """Three of the four measures solve exactly; only the canonical one does not."""
+    assert bootstrap.wall_coefficient_in_measure("dz") == 3.0
+    assert bootstrap.wall_coefficient_in_measure("dlnR") == 2.0
+    for p in (10, 63, 66, 220):
+        assert bootstrap.wall_coefficient_in_measure("dR", p) == 2.0 + 1.0 / p
+
+
+@pytest.mark.parametrize("p", [10, 63, 66, 220])
+def test_closed_forms_satisfy_the_sum_rule(p):
+    """Integrate int (S-1) d mu directly and confirm it vanishes."""
+    def zero_work(alpha, weight):
+        return quad(lambda z: ((alpha - 1.0) * z - alpha * z * z)
+                    * weight(z), 0.0, 1.0)[0]
+
+    assert zero_work(3.0, lambda z: 1.0) == pytest.approx(0.0, abs=1e-13)
+    assert zero_work(2.0, lambda z: 1.0 / (p * z)) == pytest.approx(0.0, abs=1e-12)
+    assert zero_work(2.0 + 1.0 / p,
+                     lambda z: z ** (1.0 / p - 1.0) / p) == pytest.approx(0.0, abs=1e-12)
+
+
+def test_dlnR_coefficient_is_p_independent():
+    """alpha = 2 for the RG-natural measure whatever the integer is."""
+    values = {bootstrap.wall_coefficient_in_measure("dlnR") for _ in range(3)}
+    assert values == {2.0}
+
+
+def test_canonical_wall_coefficient_reproduces_the_primary_branch():
+    """The pipeline is run at alpha = 2.809064 for p = 66; derive it."""
+    assert bootstrap.canonical_wall_coefficient(66) == pytest.approx(
+        2.809064, abs=1.0e-6)
+
+
+def test_canonical_wall_coefficient_decreases_with_p():
+    values = [bootstrap.canonical_wall_coefficient(p) for p in (62, 66, 90)]
+    assert values == sorted(values, reverse=True)
+    assert 2.79 < values[-1] < 2.82

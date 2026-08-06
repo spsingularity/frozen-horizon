@@ -37,6 +37,9 @@ From `code/`:
 
 ```bash
 # Paper I: ledger, tables, figures
+# The wall coefficient of the primary branch is derivable rather than assumed:
+#   bootstrap.canonical_wall_coefficient(66) -> 2.809064
+# and the other three measures are exact (3, 2, and 2 + 1/p respectively).
 ./.venv/bin/python scripts/make_ledger.py --p 66 --alpha 2.809064 \
     --xi 0.16666666666666666 --results invwall_p
 ./.venv/bin/python scripts/make_paper_tables.py
@@ -64,7 +67,7 @@ To regenerate the underlying runs rather than use the stored ones (each
 | Path | Purpose |
 |---|---|
 | `code/frozen_horizon/config.py` | every physical and numerical constant, with sources |
-| `code/frozen_horizon/bootstrap.py` | `C(p)`, `q(p)`, `μ²(p)`; wall coefficient from the zero-work condition |
+| `code/frozen_horizon/bootstrap.py` | `C(p)`, `q(p)`, `μ²(p)`; wall coefficient from the zero-work condition in each measure |
 | `code/frozen_horizon/model.py` | `g`, `g'`, `g''` from `p` and `α` alone |
 | `code/frozen_horizon/background.py` | Einstein-frame trajectory, stability, energy densities |
 | `code/frozen_horizon/modes.py` | scalar and tensor mode integration |

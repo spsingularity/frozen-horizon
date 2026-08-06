@@ -219,12 +219,24 @@ but does not eliminate this freedom:
 measure & $\alpha$ & $S_{\max}$ \\
 \hline
 $dz$ (wall coord.; not inv.) & $3$ & $4/3$ \\
-$d\ln R$ & $2.000000$ & $1.125$ \\
-$dR$ & $2.015873$ & $1.128$ \\
+$d\ln R$ & $2$ & $1.125$ \\
+$dR$ & $2+1/p$ & $1.128$ \\
 $d\phi\propto d\ln f_R$ (canonical) & $2.8090$--$2.8103$ & $1.291$ \\
 \hline
 \end{tabular}
 \end{center}
+The first three entries are exact. With $S-1=(\alpha-1)z-\alpha z^2$ and
+$x=qz^{1/p}$ the condition integrates in elementary form in each case: $dz$
+gives $\tfrac12(\alpha-1)=\tfrac13\alpha$, hence $\alpha=3$; $d\ln R$ carries
+the weight $dz/pz$ and gives $(\alpha-1)=\tfrac12\alpha$, hence $\alpha=2$
+for every $p$; and $dR$ carries $z^{1/p-1}$ and gives
+$(\alpha-1)p/(1+p)=\alpha p/(1+2p)$, hence $\alpha=2+1/p$, which is
+$2.015873$ at $p=63$ and $2.015152$ at $p=66$. The two curvature-based
+invariant measures therefore coincide in the large-$p$ limit. The canonical
+measure alone admits no closed form, because its weight
+$d\ln f_R/dz=(g''/g')\,dx/dz$ is built from the very wall it fixes; there
+$\alpha$ is a fixed point of the wall against its own field-space measure,
+and the quoted range is its variation across the viable integers.
 The wall coordinate $z=(x/q)^p$ embeds the integer $p$ in its own definition,
 so the $dz$ rule cannot be fundamental. Among invariant choices we adopt the
 canonical scalaron field-space measure $d\phi=\sqrt{3/2}\,\Mpl\,d\ln f_R$ as

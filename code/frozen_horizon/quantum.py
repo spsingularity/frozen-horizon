@@ -18,10 +18,47 @@ f_n(u_0) = 1, which is equivalent by linearity and keeps amplitudes O(1).
 
 import numpy as np
 from scipy.integrate import solve_ivp
-from scipy.special import hankel1
+from scipy.special import gammaln, hankel1
 
 MU2 = 3.0                       # unit gap: mu^2 = d - 1
 EQUATOR = np.pi / 2.0
+
+
+def euclidean_mode_exact(n, mu2=MU2):
+    """Closed form for f_n'(pi/2)/f_n(pi/2), for every harmonic n.
+
+    At x = cos(u) the Euclidean equation becomes the Gegenbauer equation of
+    index lambda = n + 3/2 and degree nu = s - n, solved by
+    f_n = sin^n(u) C^{n+3/2}_{s-n}(cos u) with s(s+3) = mu^2. Demanding the
+    branch regular at the pole (indicial exponents n and -(n+2)) fixes
+
+        r_n = 2 G((s+n+4)/2) G((n-s+1)/2) / [ G((s+n+3)/2) G((n-s)/2) ],
+
+    the n = 0 case of which is the r_E used by theta_exact(). Two consequences
+    are worth stating, because both are otherwise only checked mode by mode:
+
+    * Sign. For 0 < s < 1, i.e. 0 < mu^2 < 4, every argument above is positive
+      except -s/2 at n = 0, where G is negative. So K_0 < 0 and K_n > 0 for
+      ALL n >= 1: the Morse structure of a decay channel holds for the whole
+      tower, not merely the harmonics one happens to tabulate.
+    * Growth. Each Gamma ratio is asymptotically sqrt(n/2), so r_n -> n + 1
+      and K_n -> 2 pi^2 (n + 1). The linear growth is exact, not empirical.
+
+    Evaluated through log-Gamma so that large n does not overflow; the sign is
+    restored separately since only G(-s/2) at n = 0 can be negative.
+    """
+    s = growth_exponent(mu2)
+    args = np.array([(s + n + 4) / 2, (n - s + 1) / 2,
+                     (s + n + 3) / 2, (n - s) / 2])
+    if np.any(np.isclose(args, np.round(args)) & (args <= 0.0)):
+        raise ValueError(f"Gamma pole at n={n}, mu2={mu2}")
+    # gammaln returns log|G|, so recover the sign from the negative branches:
+    # G is negative on (-1, 0), positive on (-2, -1), and so on alternating.
+    signs = np.where(args > 0.0, 1.0,
+                     np.where(np.floor(-args) % 2 == 0, -1.0, 1.0))
+    magnitude = 2.0 * np.exp(gammaln(args[0]) + gammaln(args[1])
+                             - gammaln(args[2]) - gammaln(args[3]))
+    return float(signs[0] * signs[1] * signs[2] * signs[3] * magnitude)
 
 
 def euclidean_mode(n, mu2=MU2, u0=1.0e-6, rtol=1.0e-12, atol=1.0e-14):
@@ -41,13 +78,17 @@ def euclidean_mode(n, mu2=MU2, u0=1.0e-6, rtol=1.0e-12, atol=1.0e-14):
     return float(solution.y[1, -1] / solution.y[0, -1])
 
 
-def fluctuation_spectrum(max_n=8, mu2=MU2):
+def fluctuation_spectrum(max_n=8, mu2=MU2, exact=False):
     """Boundary kernel K_n H^2 = 2 pi^2 f_n'/f_n at the equator.
 
     K_0 < 0 is the single unstable direction; K_n > 0 for n >= 1 means every
-    inhomogeneous mode is Gaussian suppressed.
+    inhomogeneous mode is Gaussian suppressed. With exact=True the closed form
+    of euclidean_mode_exact() is used instead of integrating; the two agree to
+    ~1e-12 and the default stays numerical so that the closed form is checked
+    against an independent route rather than merely restated.
     """
-    ratios = {n: euclidean_mode(n, mu2=mu2) for n in range(max_n + 1)}
+    mode = euclidean_mode_exact if exact else euclidean_mode
+    ratios = {n: mode(n, mu2=mu2) for n in range(max_n + 1)}
     return ratios, {n: 2.0 * np.pi**2 * r for n, r in ratios.items()}
 
 

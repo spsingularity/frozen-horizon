@@ -83,3 +83,25 @@ def test_euclidean_kernel_has_exactly_one_negative_mode():
     _, kernel = q.fluctuation_spectrum(max_n=8)
     assert kernel[0] < 0.0
     assert all(kernel[n] > 0.0 for n in range(1, 9))
+
+
+@pytest.mark.parametrize("mu2", WINDOW)
+def test_kernel_closed_form_matches_integration(mu2):
+    """r_n in closed form against the ODE solve, for every harmonic."""
+    for n in range(9):
+        assert q.euclidean_mode(n, mu2=mu2) == pytest.approx(
+            q.euclidean_mode_exact(n, mu2=mu2), rel=1.0e-8)
+
+
+def test_morse_structure_holds_for_the_whole_tower():
+    """The closed form extends the one-negative-mode check far beyond n = 8."""
+    for mu2 in WINDOW:
+        assert q.euclidean_mode_exact(0, mu2=mu2) < 0.0
+        for n in (1, 2, 5, 20, 100, 10_000, 1_000_000):
+            assert q.euclidean_mode_exact(n, mu2=mu2) > 0.0
+
+
+def test_kernel_grows_linearly():
+    """r_n -> n + 1, so K_n -> 2 pi^2 (n+1); the linear growth is exact."""
+    for n in (10_000, 1_000_000):
+        assert q.euclidean_mode_exact(n) - n == pytest.approx(1.0, abs=1.0e-3)

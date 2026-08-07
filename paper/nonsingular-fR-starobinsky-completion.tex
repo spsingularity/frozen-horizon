@@ -35,9 +35,9 @@ four-sphere rather than at a singularity. The construction is fixed by a
 zero-work condition on the trace-flow wall in a declared integration
 measure, and by a unit spectral gap on the
 four-sphere, $\mu^2=d-1$; integrality of $p$ follows from analyticity of the
-action at $R=0$. Two representative walls---the legacy coordinate rule and
-the canonical invariant-measure choice---paired with minimal and conformal
-Higgs couplings respectively, define the two model branches analyzed. The model retains the Starobinsky predictions
+action at $R=0$. Two walls are analyzed: the canonical invariant-measure choice as the
+primary branch, and the coordinate rule as a robustness check, paired
+with conformal and minimal Higgs couplings respectively. The model retains the Starobinsky predictions
 $n_s\simeq0.962$--$0.965$ and $r\simeq0.004$, and adds an approximately
 $50\%$ localized deficit in the scalar power spectrum near
 $k\sim10^{-4}\,\mathrm{Mpc}^{-1}$, with no tensor counterpart. The deficit
@@ -54,8 +54,7 @@ excluded ($\Delta\chi^2=+13.6$ and $+8.5$), that the preferred integers give
 $\Delta\chi^2_{TT+EE}=-1.5$ to $-1.7$, and that the evidence marginalized
 over the integer ladder is $+1.0$, consistent with a statistical
 fluctuation; the deficit itself lies below cosmic variance and cannot be
-confirmed by the low-$\ell$ CMB. All numerical results are reproducible from
-the released code.
+confirmed by the low-$\ell$ CMB.
 \keywords{Inflation \and $f(R)$ gravity \and Primordial power spectrum
 \and Cosmic microwave background \and Reheating}
 \end{abstract}
@@ -260,9 +259,9 @@ analyzed set.
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figures/wall}
-\caption{Trace-flow wall $S(z)=(1-z)(1+\alpha z)$ for the three integration
-measures considered in Sec.~\ref{sec:measure} and, for contrast, the
-shoulderless linear wall $\alpha=0$. The quantity $S$ is the
+\caption{Trace-flow wall $S(z)=(1-z)(1+\alpha z)$ for three of the four
+integration measures tabulated in Sec.~\ref{sec:measure} and, for
+contrast, the shoulderless linear wall $\alpha=0$. The quantity $S$ is the
 Einstein--Hilbert fraction of the action. The excursion above $S=1$ (the
 fast-roll shoulder) generates the scalar power deficit; the linear wall
 $\alpha=0$, which has no shoulder, produces no observable feature
@@ -397,9 +396,9 @@ inflationary predictions require reheating input is well established in
 general \cite{LiddleLeach2003,MartinRingeval2010,Dai2014,MRV2014}, and the
 converse---that fitting a large-scale feature back-constrains the reheating
 history---has been noted for low-multipole models \cite{GoswamiYajnik2018};
-the statement proved here is the sharp version for a feature family: the
-feature wavenumber and the reheating history form an exactly flat direction,
-which no fit can break and only a computed reheating history can close.
+For a feature family the statement is exact: the feature wavenumber and
+the reheating history form a flat direction, which no fit can break and
+only a computed reheating history can close.
 
 \subsection{Closure}
 The closure exploits the structure of Eq.~(\ref{eq:g}): at low curvature every
@@ -419,7 +418,7 @@ where $\xi_H$ is the Higgs curvature coupling and $\Delta_{\rm an}$ is the
 gauge trace-anomaly contribution, evaluating to $7.8\times10^{-3}$ with the
 Standard Model beta functions run to the decay scale
 \cite{GorbunovPanin2010,GorbunovTokareva2012}.
-We do \emph{not} use the sudden-decay approximation: the coupled
+The sudden-decay approximation is not used. The coupled
 scalaron--radiation system
 $d\rho_\phi/dN=-3\rho_\phi-(\Gamma_\phi/H)\rho_\phi$,
 $d\rho_r/dN=-4\rho_r+(\Gamma_\phi/H)\rho_\phi$ is integrated to
@@ -563,7 +562,7 @@ not by the quadrupole (both $\simeq16\%$ suppressed) but by the
 \emph{width} of the suppression (Fig.~\ref{fig:clratios}): the broad pattern
 reaches $C_3^{TT}/C_3^{\rm smooth}=0.73$ and persists past $\ell=10$, while
 the narrow one is back above $0.92$ by $\ell=5$. This correlated $TT$--$TE$--$EE$ width
-signature is the model family's only internal discriminant; both members
+signature is the only internal discriminant within the family; both members
 fall in the primordial low-$\ell$ suppression class that is the target of
 forthcoming cosmic-variance-limited $E$-mode forecasts \cite{LiteBIRD2024}.
 \input{tables/cmb_ratios.tex}
@@ -629,20 +628,20 @@ cutoffs find the fit gain roughly cancelling the Occam penalty of a single
 parameter \cite{Hergt2019a,Hergt2019b}; and a recent survey of
 infrared-cutoff families reaches the same verdict \cite{Upadhyay2026}.
 Against that economy of roughly three units of $\chi^2$ per fitted
-parameter, $-1.5$ to $-1.7$ with no fitted feature parameter is competitive
---- the marginalized evidence of Table~\ref{tab:evidence} is the Bayesian
-counterpart---and one that does carry the look-elsewhere penalty
-explicitly, $+1.70$ for the best single integer against $+0.99$
-marginalized---and it responds directly to
-the a-posteriori-selection critique of low-multipole explanations
-\cite{Bennett2011,Planck2018VII}. The complementary result is of greater consequence: because the members of the family carry no adjustable scale, they
-can be rejected outright, and the $+13.6$ and $+8.5$ exclusions have no
-analogue in continuous-cutoff fits, which the data can fail to reward but
-can never exclude. We note finally that a suppression at
+parameter, $-1.5$ to $-1.7$ with no fitted feature parameter is
+comparable. The marginalized evidence of Table~\ref{tab:evidence} is the
+Bayesian counterpart, and carries the look-elsewhere penalty
+explicitly: $+1.70$ for the best single integer against $+0.99$
+marginalized. This addresses the a-posteriori-selection critique of
+low-multipole explanations \cite{Bennett2011,Planck2018VII}.
+The exclusions have no analogue in continuous-cutoff fits: because the
+members of the family carry no adjustable scale, individual members can
+be rejected, whereas a continuous cutoff can fail to be rewarded by the
+data without being excluded by it. A suppression at
 $k\simeq2$--$3\times10^{-4}\Mpc$ has been shown to move the large-angle
 correlation statistic $S_{1/2}$ toward its observed low value
-\cite{Melia2021,Copi2015}, so the surviving members inherit a second
-large-angle consequence at no additional cost.
+\cite{Melia2021,Copi2015}; the broad member of each branch, though not
+the preferred one, lies in that range.
 
 These results are confined to $\ell\le29$ at fixed late-time cosmology and
 fixed $\tau$; the transfer-function cancellation in the ratio justifies this
@@ -661,9 +660,9 @@ required but the choice among invariant measures remains free; the unit
 spectral gap $\mu^2=d-1$, an independent axiom that cannot be derived within
 the truncation; and the matter boundary condition $\xi_H$, for which the
 conformal fixed-point value is symmetry-protected but not yet derived. The
-causal-patch measure of the exit epoch, frequently listed among the
-assumptions of such constructions, is demonstrably not an independent input
-here: every observable is referenced to the end of inflation on a strongly
+causal-patch measure of the exit epoch, often listed among the assumptions
+of such constructions, is not an independent input here: every observable
+is referenced to the end of inflation on a strongly
 attracting trajectory, and no measurable quantity depends on where inflation
 began.
 
@@ -713,14 +712,15 @@ against $d\ln f_R$, so the thermodynamic framework independently singles
 out the canonical measure of Sec.~\ref{sec:measure} as the natural one,
 while leaving the zero-work condition itself underived.
 
-The decisive open problem is ultraviolet, and it is well posed. Both
+The principal open problem is ultraviolet, and it is well posed. Both
 remaining arbitrary inputs are boundary data that a fixed-function equation
 would supply: a regulator-independent $f(R)$ fixed function evaluated on the
 inflationary trajectory would either satisfy a zero-work identity in some
 definite measure---selecting $\alpha$---or not, and its analytic eigenoperator
 spectrum would either contain the wall pair at some definite $p$---selecting
 the rung---or not \cite{DietzMorris2012,BonannoContilloPercacci2010}. Either
-outcome is decisive: a derivation would convert the feature location into a
+outcome would settle the question: a derivation would convert the feature
+location into a
 parameter-free prediction testable through the width pattern, while a
 refutation would falsify the construction independently of any data. Until
 then, the model is a nonsingular completion of the observational benchmark

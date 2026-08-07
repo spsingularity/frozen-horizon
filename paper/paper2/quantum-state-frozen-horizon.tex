@@ -231,14 +231,15 @@ contour are still required; positivity of the physical spectrum does not by
 itself resolve the Euclidean conformal-factor problem, and we return to this
 in Sec.~\ref{sec:discussion}.
 
-We note one numerical point, since it is easy to encounter and silent when
-it occurs. Imposing the regular behaviour literally as
-$f_n(u_0)=u_0^{\,n}$ starts the integration below the absolute tolerance of a
-standard adaptive solver once $n\gtrsim6$: with $u_0=10^{-6}$ and
-$\mathrm{atol}=10^{-14}$, the initial amplitude $u_0^{\,7}=10^{-42}$ is
-twenty-eight orders of magnitude beneath the error control, and the returned
-solution is numerical noise rather than the regular mode. All results here
-normalize $f_n(u_0)=1$
+One numerical caution applies to Eq.~(\ref{eq:euclid}). Imposing the
+regular behaviour literally as $f_n(u_0)=u_0^{\,n}$ starts the
+integration far beneath the absolute tolerance of a standard adaptive
+solver: with $u_0=10^{-6}$ and $\mathrm{atol}=10^{-14}$ the initial
+amplitude falls below the error control from $n=3$, and by $n=8$ it is
+$10^{-48}$. The integration then returns numerical noise rather than the
+regular mode, without any indication of failure; with the solver used
+here the literal start reproduces the exact ratio through $n=7$ and
+breaks down at $n=8$. All results here normalize $f_n(u_0)=1$
 instead, which is equivalent by linearity of Eq.~(\ref{eq:euclid}) and keeps
 amplitudes of order unity throughout.
 
@@ -561,7 +562,7 @@ continuum treatment.
 \caption{Effective noise amplitude injected by each $S^3$ shell, against
 shell index and crossing time. The sequence falls steeply and crosses the
 continuum value near the fourth shell, but the first shell exceeds it by a
-factor of three, precisely in the epoch where the exit occurs.}
+factor of three, within the epoch in which the exit occurs.}
 \label{fig:shells}
 \end{figure}
 
@@ -626,27 +627,26 @@ required for a quantitative exit-time distribution; we do not construct
 one here, and the moments quoted above are continuum values retained as
 a benchmark.
 
-Both results remain operational rather than predictive, for a reason that
-should be stated plainly. The threshold $X_c$ is inherited from a continuum
+Both results remain operational rather than predictive. The threshold
+$X_c$ is inherited from a continuum
 drift-versus-noise criterion, and a physical decoherence or
 branch-classicality condition must replace it before any duration is claimed
 as a prediction. What is state-derived, and independent of that choice, is
 the set of crossing times $N_n$ and the shell covariances $\Delta V_n$.
 
-One consistency requirement deserves emphasis because it is easy to violate.
 The classical e-fold count that follows the stochastic phase must be started
 from the same threshold at which that phase ends. Using the tachyonic
 boundary for the stochastic moments while retaining a classical count begun
 at the massless boundary double-counts $\ln\sqrt{Q_\nu(1)}/s=1.303$ e-folds
 of trajectory. With the thresholds matched, the worked example of the
-companion paper gives a total duration of $70.35\pm0.82$ e-folds, which we
-quote as a benchmark rather than a prediction.
+companion paper gives a total duration of $70.35\pm0.82$ e-folds, a
+benchmark rather than a prediction.
 
 \section{Observability of the staircase}
 \label{sec:observability}
-A discrete spectrum of crossing times is an arresting prediction, and it is
-natural to ask whether it survives into the observable sky. It does not, and
-the margin is very large.
+Whether the discrete spectrum of crossing times survives into the
+observable sky determines its phenomenological relevance. The results
+below indicate that it does not.
 
 After a patch classicalizes, the separate-universe map converts a growing
 scalaron perturbation into the curvature perturbation,
@@ -683,8 +683,8 @@ throughout the observable range, to one part in $10^{6}$. We conclude that
 the $\ln(n+1)$ staircase produces no observable signature in the cosmic
 microwave background.
 
-This is a negative result, and it should be read as delimiting the reach of
-the analysis rather than diminishing it. The discreteness established in
+The result delimits the reach of the analysis. The discreteness
+established in
 Sec.~\ref{sec:shells} is a property of the initial quantum state, exact and
 state-derived, but the observable universe samples only the deep continuum
 tail of the sequence. Any observable low-multipole signature of such a model
@@ -696,8 +696,8 @@ beginning.
 \section{Discussion}
 \label{sec:discussion}
 The analysis establishes a definite quantum state for a tachyonic $f(R)$
-horizon within a well-specified domain, and it is worth separating that
-domain from what lies outside it.
+horizon within a well-specified domain. Its boundaries are the
+following.
 
 Three limitations are structural rather than technical. First, the
 intersection-number result of Sec.~\ref{sec:lapse} is established throughout

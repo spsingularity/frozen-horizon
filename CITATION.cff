@@ -23,8 +23,8 @@ authors:
     orcid: "https://orcid.org/0009-0005-8153-071X"
     affiliation: "Independent researcher, Santa Clara, California 95050, USA"
 license: MIT
-version: v1.0.0
-date-released: "2026-08-06"
+version: v1.1.0
+date-released: "2026-08-07"
 # The concept DOI is cited here because it always resolves to the latest
 # version; the versioned DOI for the release named above is under identifiers.
 doi: 10.5281/zenodo.21829379

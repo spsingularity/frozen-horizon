@@ -90,8 +90,9 @@ phases to the same geometry, and the Lorentzian path-integral analyses of
 recent years have shown that the choice is consequential rather than
 formal---a strictly Dirichlet prescription from zero size, deformed by
 Picard--Lefschetz theory, selects tunneling weights and inverse-Gaussian
-perturbations \cite{FLT2017,FLT2017b}, while alternative boundary conditions
-restore a well-behaved state \cite{DiTucci2019,Lehners2023}. Any claim that
+perturbations \cite{FLT2017,FLT2017b}---a reading contested in
+\cite{DDHHJ2017}---while alternative boundary conditions restore a
+well-behaved state \cite{DiTucciLehners2019,DiTucci2019,Lehners2023}. Any claim that
 such a saddle furnishes the beginning of a cosmological history must
 therefore be accompanied by a specification of the contour, and by evidence
 that the resulting measure is normalizable and connects to real Lorentzian
@@ -102,7 +103,8 @@ treatment is general: every quantity computed below depends on the theory
 only through $\mu^2$, so the results apply to any such horizon and are
 independent of the particular curvature function that produces it. The
 admissibility of the saddle as a decay channel requires exactly one negative
-mode \cite{ColemanDeLuccia1980}, which bounds $0<\mu^2<4$. Our principal
+mode \cite{Coleman1988,ColemanDeLuccia1980}, which bounds $0<\mu^2<4$.
+Our principal
 result is that this condition
 is not sufficient. Requiring the growing Lorentzian branch to be real fixes
 the contour uniquely, and the Born measure along it is normalizable only for
@@ -443,7 +445,8 @@ prescription is not admissible as the state of the present system, for the
 same reason the real Euclidean axis was rejected above. A more suitable
 formulation omits an artificial initial Gibbons--Hawking--York boundary term,
 so that the variational problem fixes the initial momentum rather than the
-initial size \cite{DiTucci2019}. Regular compact closure then requires the
+initial size \cite{DiTucciLehners2019,DiTucci2019}. Regular compact
+closure then requires the
 Neumann condition
 \begin{equation}
 \left.\frac{\dot q}{2N}\right|_{t=0}=+i,
@@ -471,8 +474,14 @@ These are the expanding and contracting Hartle--Hawking saddles
 tunneling saddles carrying $+i/H_H^2$ are absent. Picard--Lefschetz flow
 deforms the full real lapse line into $\mathbb{R}_N\sim\mathcal{J}_-+
 \mathcal{J}_+$, so both retained saddles have nonvanishing intersection
-number. The background contour question is thus settled exactly for this
-saddle, rather than inferred from a local Hessian.
+number. This selection reproduces, for the frozen-horizon background,
+the result established for Robin conditions in
+\cite{DiTucciLehners2019}: the unstable saddle associated with the
+zero-size Dirichlet prescription is eliminated and the Hartle--Hawking
+pair survives. What the present calculation adds is that the background
+contour is settled exactly for this saddle, rather than inferred from a
+local Hessian, and that the scalar sector can be carried along with it,
+as the remainder of this section shows.
 
 The scalar sector decouples from the lapse and metric perturbations at
 quadratic order. Every mixed term in the Hessian carries either
@@ -587,7 +596,10 @@ continuum treatment is least reliable.
 
 \section{Exit as a first-passage problem}
 \label{sec:exit}
-The coarse-grained unstable mode $X=\phi_H-\phi$ obeys
+Exit is treated by the first-passage methods standard in stochastic
+inflation \cite{VenninStarobinsky2015}, in which the moments of the
+e-fold count follow from the time taken to reach a threshold. The
+coarse-grained unstable mode $X=\phi_H-\phi$ obeys
 $dX=sX\,dN+\sigma_\epsilon\,dW_N$ with $s=\tfrac12[\sqrt{9+4\mu^2}-3]$. The
 noise amplitude is not the familiar massless value. At a coarse-graining
 boundary $k_c=\epsilon aH_H$ the exact de Sitter mode function gives

@@ -304,6 +304,23 @@ def paper2_claims(report):
     report.claim(PAPER2, "double-count ln sqrt(Q)/s",
                  np.log(kick) / model.exit_exponent, "{:.3f}")
 
+    # The cubic self-consistency check of Sec. 3.4. Both quoted numbers now
+    # come from the same computed W_3, so they cannot drift apart again.
+    nonlinear = model.nonlinearity(
+        run["observables"]["M_over_Mpl_corrected"],
+        duration["classicality_boundary_over_Mpl"],
+        thimble["sigma_Cg_over_H"] * duration["H_horizon_over_Mpl"])
+    report.claim(PAPER2, "W_3 cubic coefficient",
+                 abs(nonlinear["W_3"]) * 1.0e10, "{:.1f}\\times10^{{-10}}")
+    report.claim(PAPER2, "cubic/linear force at the drift threshold",
+                 nonlinear["cubic_over_linear_at_threshold"] * 1.0e5,
+                 "{:.1f}\\times10^{{-5}}")
+    report.claim(PAPER2, "-ln P at the crossover amplitude",
+                 nonlinear["minus_ln_P_at_crossover"] / 1.0e10,
+                 "{:.0f}\\times10^{{10}}")
+    report.absent(PAPER2, "stale cubic/linear ratio $3\\times10^{-6}$",
+                  "$3\\times10^{-6}$")
+
     # Values from the superseded p = 67 run that Paper II used to quote.
     for stale in ("74.403", "74.40", "4.5\\times10^{-12}", "2\\times10^{-8}"):
         report.absent(PAPER2, f"stale p=67 value {stale}", stale)

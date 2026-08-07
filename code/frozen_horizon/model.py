@@ -78,6 +78,58 @@ class FrozenHorizonModel:
         _, gp, _, qpot, _ = self.geometry(x)
         return 0.5 * qpot / (gp * gp)
 
+    def potential_taylor(self, mass_scale, order=5, step=1.0e-4):
+        """Taylor coefficients of U(phi) about the horizon, in M_Pl units.
+
+        Returns (U_H, U2, U3): the potential at the frozen horizon, its second
+        derivative -- which must equal -mu^2 H_H^2, and is checked against that
+        by the tests -- and the cubic coefficient W_3 = U'''(phi_H).
+
+        W_3 is what decides whether the linear treatment of the exit is
+        self-consistent. Expanding the force,
+
+            F = -dU/dphi = -( U2 dphi + (1/2) W_3 dphi^2 ),
+
+        the cubic and linear terms are comparable at dphi_x = 2|U2|/|W_3|, and
+        the ratio at any smaller amplitude is just dphi/dphi_x. Both numbers
+        Paper II quotes follow from this; they were previously asserted, and
+        one of the two was wrong by a factor of about four.
+
+        The curve is built parametrically in x, since phi = sqrt(3/2) ln f_R
+        and U = (x g' - g)/(2 g'^2) are both known there, and differentiated by
+        a local polynomial fit rather than by chaining derivatives of g.
+        """
+        centre = self.q
+        offsets = centre * step * np.arange(-6, 7)
+        phi, potential = [], []
+        for x in centre + offsets:
+            _, gp, _, qpot, _ = self.geometry(x)
+            phi.append(np.sqrt(1.5) * np.log(gp))
+            potential.append(0.5 * qpot / (gp * gp) * mass_scale**2)
+        phi = np.asarray(phi) - np.sqrt(1.5) * np.log(self.geometry(centre)[1])
+        coefficients = np.polyfit(phi, np.asarray(potential), order)
+        return (float(coefficients[-1]),          # U_H
+                float(2.0 * coefficients[-3]),    # U''(phi_H)
+                float(6.0 * coefficients[-4]))    # W_3 = U'''(phi_H)
+
+    def nonlinearity(self, mass_scale, threshold, seed_width):
+        """Where the cubic force matters, relative to the Born measure.
+
+        `threshold` is the drift-versus-noise amplitude X_c and `seed_width`
+        the Born width sigma_Cg, both in M_Pl. Returns the cubic-to-linear
+        force ratio at X_c, the amplitude at which the two are equal, and the
+        Born suppression -ln P there. The linear treatment is self-consistent
+        when that suppression is large.
+        """
+        _, second, third = self.potential_taylor(mass_scale)
+        crossover = 2.0 * abs(second) / abs(third)
+        return {
+            "W_3": third,
+            "cubic_over_linear_at_threshold": threshold / crossover,
+            "crossover_amplitude": crossover,
+            "minus_ln_P_at_crossover": crossover**2 / (2.0 * seed_width**2),
+        }
+
     # --- Bootstrap diagnostics --------------------------------------------
 
     @property

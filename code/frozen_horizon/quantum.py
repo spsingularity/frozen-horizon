@@ -245,8 +245,11 @@ def continuum_kick(epsilon=1.0, mu2=MU2):
     """Q_nu(eps) = (pi/2) eps^3 |H^(1)_nu(eps)|^2, the tachyonic enhancement.
 
     The coarse-grained kick is sigma = (H/2pi) sqrt(Q_nu); the massless value
-    Q = 1 is wrong at a tachyonic horizon. Q_nu(1) = 7.8686 at mu^2 = 3, which
-    the discrete shell sequence approaches from above.
+    Q = 1 is wrong at a tachyonic horizon. Q_nu(1) = 7.8686 at mu^2 = 3. The
+    discrete shell sequence does NOT approach this from above: it overshoots
+    at n = 1, crosses between the fourth and fifth shells, undershoots to
+    about 0.975 of it near n = 9, and returns from below, reaching one percent
+    only past n = 40. See test_shell_sequence_crosses_the_continuum_value.
     """
     nu = np.sqrt(2.25 + mu2)
     return float(np.pi / 2.0 * epsilon**3 * np.abs(hankel1(nu, epsilon)) ** 2)

@@ -80,6 +80,15 @@ if [ "$MODE" = "full" ]; then
   "$PY" scripts/lowl_likelihood_eval.py \
       invwall_p64 invwall_p65 invwall_p66 invwall_p67 \
       resolved_p62 resolved_p63 resolved_p64 resolved_p65
+
+  # Justifies using the exact SimAll likelihood rather than diagonal errors;
+  # Paper I Sec. 6 quotes both figures, so both must be reproducible.
+  say "EE diagonal-error diagnostic"
+  "$PY" scripts/ee_diagonal_diagnostic.py invwall_p65 invwall_p66
+
+  # Independent Boltzmann code on the same primordial tables.
+  say "CLASS cross-check of the CAMB ratios"
+  "$PY" scripts/class_crosscheck.py invwall_p65 invwall_p66
 fi
 
 if [ "$MODE" != "--check" ]; then
@@ -93,6 +102,13 @@ fi
 
 say "Tests"
 "$PY" -m pytest tests/ -q --run-slow
+
+if [ "$MODE" != "--check" ]; then
+  say "Validation scripts behind the manuscript's cross-check claims"
+  "$PY" scripts/independent_solver.py | tail -4
+  "$PY" scripts/shape_statistic.py | tail -3
+  "$PY" scripts/eos_reheating.py | tail -3
+fi
 
 say "Manuscript numbers against the pipeline"
 "$PY" scripts/check_manuscript.py

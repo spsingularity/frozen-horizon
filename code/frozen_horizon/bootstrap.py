@@ -115,11 +115,6 @@ def q_of_p(p, alpha=WALL_COEFFICIENT):
     return p * (alpha + 1.0) - 3.0 * c_of_p(p, alpha)
 
 
-def mu_squared(p, horizon_slope):
-    """Euclidean scalaron mass ratio |m_H^2| / H_H^2 from F_H = g'(q)."""
-    return 16.0 * p / (horizon_slope + 4.0 * p)
-
-
 def exit_exponent(mu2=3.0):
     """Growth rate s of the unstable mode, delta phi ~ exp(sN).
 

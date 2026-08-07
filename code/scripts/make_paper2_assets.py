@@ -111,8 +111,11 @@ def fig_thimble():
     grid = np.linspace(-1.6, 1.6, 400)
     X, Y = np.meshgrid(grid, grid)
     A = X + 1j * Y
-    # Re ln Psi propto -Re(A^2): positive (divergent) along the real axis.
-    weight = -np.real(A**2)
+    # Re ln Psi = +|K_0| Re(A^2) / 2H^2, so the exponent is POSITIVE (and the
+    # measure divergent) along the real axis, where A^2 > 0. The sign here was
+    # inverted, which flipped the colour scale and made the caption describe
+    # the opposite of what was plotted.
+    weight = np.real(A**2)
     ax.contourf(X, Y, weight, levels=25, cmap="RdBu_r", alpha=0.75)
     ax.contour(X, Y, weight, levels=[0.0], colors="0.4", linewidths=0.6)
 

@@ -31,6 +31,17 @@
     "Gamma_over_Mpl": 3.1843353796699666e-20,
     "T_reh_GeV": 150450893.98629713
   },
+  "n_star_budget": {
+    "terms": {
+      "decay_rate": 0.11552453009332421,
+      "reheating_treatment": 0.19959638627342002,
+      "equation_of_state": 0.05,
+      "g_star": 0.01
+    },
+    "sigma_N_star": 0.23618771023635346,
+    "N_star_resolved": 50.596623888680234,
+    "N_star_sudden": 50.397027502406814
+  },
   "observables": {
     "n_s": 0.9624510486531993,
     "alpha_s": -0.0013624953094544202,

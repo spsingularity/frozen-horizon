@@ -122,6 +122,7 @@ def main():
     slow_roll_end = float(model.geometry(2.0 * np.sqrt(3.0))[1])
     flow = modes.hubble_flow_tilts(bg)
     reheat = reheating.solve_n_star_resolved(bg, xi_higgs=args.xi)
+    budget = reheating.n_star_error_budget(bg, xi_higgs=args.xi)
 
     print("[3/5] notch under each P_smooth definition", flush=True)
     table = np.genfromtxt(
@@ -166,6 +167,7 @@ def main():
             ("N_star", "M_over_Mpl", "V_star", "rho_end", "Gamma_over_Mpl",
              "T_reh_GeV")
         },
+        "n_star_budget": budget,
         "observables": run["observables"],
         "notch": notch_variants,
         "duration": duration,
@@ -184,7 +186,8 @@ def main():
         (r"$q = R_H/M^2$", f"{b['q']:.9f}", r"unit-gap condition"),
         (r"$\mu^2$", f"{b['mu_squared']:.6f}", "verified numerically"),
         (r"$s$", f"{b['exit_exponent_s']:.6f}", r"$(\sqrt{21}-3)/2$"),
-        (r"$N_*$", f"{r['N_star']:.2f} $\\pm$ 0.20", "resolved reheating"),
+        (r"$N_*$", f"{r['N_star']:.2f} $\\pm$ {budget['sigma_N_star']:.2f}",
+         "resolved reheating"),
         (r"$M/M_{\rm Pl}$", latex_sci(r['M_over_Mpl'], 4), r"fixed by $A_s$"),
         (r"$T_{\rm reh}$", latex_sci(r['T_reh_GeV'], 3) + " GeV",
          "at radiation equality"),

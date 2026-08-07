@@ -92,12 +92,14 @@ measure is a fixed point, `bootstrap.canonical_wall_coefficient(66)`
 
 | Script | Establishes |
 |---|---|
-| `independent_solver.py` | conformal-time Mukhanov–Sasaki solver, structurally distinct from the pipeline; transfer agrees to rms `4e-4` |
+| `independent_solver.py` | conformal-time Mukhanov–Sasaki solver, structurally distinct from the pipeline; transfer agrees to rms `3.9e-4` |
 | `dimension_check.py` | `d`-dimensional form of the horizon conditions |
 | `eos_reheating.py` | scalaron equation of state measured, not assumed |
 | `shape_statistic.py` | translation-invariant `D_pp'`: `p` is not observable beyond feature location |
 | `marginalize_rungs.py` | rung-marginalized evidence (reads the likelihood JSON; no embedded numbers) |
 | `check_manuscript.py` | every number in the manuscript prose, recomputed and matched against the `.tex` |
+| `ee_diagonal_diagnostic.py` | why the exact SimAll likelihood is used for `EE` rather than diagonal errors |
+| `class_crosscheck.py` | independent CLASS reproduction of the CAMB feature ratios |
 
 ## Notes on the stored results
 

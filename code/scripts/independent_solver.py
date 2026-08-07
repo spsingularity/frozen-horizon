@@ -27,8 +27,10 @@ Model (p = 63, alpha = 3):
     U_phi = (2g - x g') / (sqrt(6) g'^2)   [closed form via chain rule]
 """
 
+import json
 import math
 import time
+from pathlib import Path
 
 import numpy as np
 from scipy.integrate import solve_ivp
@@ -44,7 +46,17 @@ CP = 1.0 - 2.0 * (P + 1) / (P - 1) + 3.0 * (2 * P + 1) / (2 * P - 1)
 Q = 4.0 * P - 3.0 * CP
 S6 = math.sqrt(6.0)
 S32 = math.sqrt(1.5)
-N_STAR = 51.6103
+REFERENCE_RUN = "resolved_p63"
+
+# N_* is read from the run this solver validates against, not hardcoded. The
+# two must agree exactly: a 0.011 e-fold offset translates the notch in ln k,
+# and since the comparison marginalizes only amplitude and tilt (not a shift),
+# the mismatch lands straight in the residual. That is precisely what happened
+# when the pipeline moved to the converged reheating fixed point and this
+# literal did not -- the quoted agreement degraded from 4e-4 to 5.3e-3 while
+# the script still reported success against its own stale self-check values.
+_RUN_DIR = Path(__file__).resolve().parent.parent / "results" / REFERENCE_RUN
+N_STAR = json.loads((_RUN_DIR / "summary.json").read_text())["inputs"]["n_star"]
 OFFSET = 1e-10
 
 A1 = 2.0 * Q / (P - 1)
@@ -291,9 +303,8 @@ print(f"  notch minimum: transfer = {T_mine[i_min]:.6f} "
 # ----------------------------------------------------------------------
 # Comparison with the pipeline reference
 # ----------------------------------------------------------------------
-ref = np.genfromtxt(
-    "/Users/stilianpandev/Projects/frozen-horizon/code/results/resolved_p63/"
-    "primordial_transfer.csv", delimiter=",", names=True)
+ref = np.genfromtxt(_RUN_DIR / "primordial_transfer.csv",
+                    delimiter=",", names=True)
 REF_S = PchipInterpolator(np.log(ref["k_over_kpivot"]),
                           np.log(ref["scalar_transfer"]))
 REF_T = PchipInterpolator(np.log(ref["k_over_kpivot"]),

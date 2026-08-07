@@ -93,6 +93,18 @@ class Report:
         print(f"  FAIL  {label:<44} stale value {stale} still in {paper.name}")
         return False
 
+    def bound(self, paper, label, value, limit):
+        """Assert a computed value satisfies a bound the manuscript states."""
+        self.checked += 1
+        if value <= limit:
+            if self.verbose:
+                print(f"  ok    {label:<44} {value:.3e} <= {limit:.1e}")
+            return True
+        self.failures.append((paper.name, label,
+                              f"{value:.3e} exceeds stated {limit:.1e}"))
+        print(f"  FAIL  {label:<44} {value:.3e} exceeds stated {limit:.1e}")
+        return False
+
     def exempt(self, label, why):
         if self.verbose:
             print(f"  --    {label:<44} exempt: {why}")
@@ -175,6 +187,71 @@ def paper1_claims(report):
     # Superseded exclusion values, from before the N_* fixed point was solved.
     for stale in ("$+13.4$", "$+8.2$", "$+8.189$"):
         report.absent(PAPER1, f"stale exclusion {stale}", stale)
+
+    # The N_* systematic budget, and the rung separation it implies. Every
+    # term is computed; the manuscript previously carried a stale 0.19, an
+    # inconsistent 0.15 in the same budget, and a "more than four sigma"
+    # separation that the corrected quadrature does not support.
+    n_star = run["inputs"]["n_star"]
+    for _ in range(8):
+        solved = reheating.solve_n_star_resolved(
+            background.prepare(model, n_star=n_star), xi_higgs=1.0 / 6.0)
+        if abs(solved["N_star"] - n_star) < 1.0e-9:
+            break
+        n_star = solved["N_star"]
+    budget = reheating.n_star_error_budget(
+        background.prepare(model, n_star=n_star), xi_higgs=1.0 / 6.0)
+    report.claim(PAPER1, "resolved vs sudden-decay difference",
+                 budget["terms"]["reheating_treatment"], "{:.2f}")
+    report.claim(PAPER1, "sigma(N_*) in quadrature",
+                 budget["sigma_N_star"], "{:.2f}")
+    for spacing, label in ((0.94, "closest"), (0.99, "widest")):
+        report.claim(PAPER1, f"rung separation, {label} spacing",
+                     spacing / budget["sigma_N_star"], "{:.2f}")
+    report.absent(PAPER1, "stale 'more than four standard deviations'",
+                  "more than four standard deviations")
+
+    # The EE diagonal-error diagnostic, now reproducible rather than asserted.
+    diagnostic = {row["run"]: row for row in json.loads(
+        (ROOT / "results" / "ee_diagonal_diagnostic.json").read_text())}
+    broad = diagnostic["invwall_p65"]
+    report.claim(PAPER1, "EE diagonal diagnostic, broad pattern",
+                 broad["dEE_diagonal"], "{:.2f}")
+    report.claim(PAPER1, "EE exact, broad pattern", broad["dEE_exact"], "{:.2f}")
+    report.absent(PAPER1, "stale diagonal diagnostic $+1.7$", "($+1.7$,")
+
+    # Feature motion per rung, from the notch locations of the stored runs.
+    def notch(run):
+        return json.loads((ROOT / "results" / run / "summary.json").read_text()
+                          )["notch"]["notch_k_Mpc"]
+
+    for prefix, rungs, label in (("resolved_p", (62, 63, 64, 65), "coordinate"),
+                                 ("invwall_p", (64, 65, 66, 67), "invariant")):
+        steps = [np.log(notch(f"{prefix}{a}") / notch(f"{prefix}{b}"))
+                 for a, b in zip(rungs, rungs[1:])]
+        report.claim(PAPER1, f"dN_f/dp, {label} wall",
+                     float(np.mean(steps)), "{:.3f}")
+
+    # The l=2 CMB ratios and quadrupole suppression quoted in Sec. 6.
+    ratios = np.load(ROOT / "results" / "invwall_p65" / "camb_ratio.npz")
+    report.claim(PAPER1, "l=2 TT ratio, broad", float(ratios["TT"][2]), "{:.2f}")
+    report.claim(PAPER1, "l=2 EE ratio, broad", float(ratios["EE"][2]), "{:.2f}")
+    narrow = np.load(ROOT / "results" / "invwall_p66" / "camb_ratio.npz")
+    suppression = [100.0 * (1.0 - float(r["TT"][2])) for r in (ratios, narrow)]
+    report.claim(PAPER1, "quadrupole suppression, both rungs",
+                 sum(suppression) / 2.0, "{:.0f}")
+
+    # CLASS cross-check, now performed rather than asserted. This is a BOUND
+    # claim ("better than X"), so assert the bound holds rather than matching
+    # a string: a stated tolerance that the computation exceeds is the error,
+    # and a stated tolerance that is merely loose is not.
+    crosscheck = json.loads(
+        (ROOT / "results" / "class_crosscheck.json").read_text())
+    worst = max(row["worst_overall"] for row in crosscheck)
+    report.bound(PAPER1, "CLASS agreement better than 1.1e-3",
+                 worst, 1.1e-3)
+    report.absent(PAPER1, "stale CLASS tolerance $6\\times10^{-4}$",
+                  "than $6\\times10^{-4}$")
 
     report.exempt("A_s, Planck cosmology, chi_*", "observational inputs")
     report.exempt("N=54.4 of Bezrukov-Gorbunov", "cited from literature")

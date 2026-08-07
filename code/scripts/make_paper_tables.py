@@ -111,7 +111,8 @@ def cmb_ratio_table():
         r"\caption{Lensed $C_\ell$ ratios (featured over smooth) from CAMB at"
         r" the reheating-determined $N_*$, for the two viable integers of the"
         r" invariant-wall branch; the CAMB ratios are independently reproduced"
-        r" by CLASS to better than $6\times10^{-4}$ at every $\ell\le30$.}",
+        r" by CLASS to better than $1.1\times10^{-3}$ at every"
+        r" $\ell\le30$.}",
         r"\label{tab:cmbratios}", r"\end{table*}", "",
     ]
     write("cmb_ratios.tex", "\n".join(lines))

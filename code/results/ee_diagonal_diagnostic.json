@@ -1,0 +1,22 @@
+[
+ {
+  "run": "invwall_p65",
+  "dEE_exact": 0.0733265562384986,
+  "dEE_diagonal": 1.329555770502509
+ },
+ {
+  "run": "invwall_p66",
+  "dEE_exact": 0.0017143939605261949,
+  "dEE_diagonal": 0.5480430263944118
+ },
+ {
+  "run": "resolved_p62",
+  "dEE_exact": -0.7395727541974679,
+  "dEE_diagonal": -0.0873480574860892
+ },
+ {
+  "run": "resolved_p63",
+  "dEE_exact": 0.22781888371901005,
+  "dEE_diagonal": 1.5029081183261326
+ }
+]

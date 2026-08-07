@@ -209,6 +209,52 @@ def solve_n_star_resolved(background, xi_higgs=None, bracket=(35.0, 59.0)):
     return result
 
 
+def n_star_error_budget(background, xi_higgs=None, gamma_factor=2.0,
+                        eos_efolds=0.05, g_star_efolds=0.01):
+    """Systematic budget on N_*, added in quadrature.
+
+    The terms, and why each is what it is:
+
+    * Decay rate. N_* depends on it only as dN_*/dln(Gamma) = 1/6, so a
+      factor-of-`gamma_factor` uncertainty costs ln(factor)/6 e-folds.
+    * Reheating treatment. The difference between the resolved integration
+      and the sudden-decay shortcut, used as a conservative proxy for the
+      residual error in the resolved treatment. Computed here rather than
+      quoted, because it moves whenever the reheating model or N_* changes --
+      it was 0.19 e-folds before the N_* fixed point was solved and is 0.20
+      after, and the manuscript previously carried both that stale value and
+      a third, inconsistent one in the quadrature.
+    * Equation of state and g_*: measured on the oscillating trajectory and
+      from the Standard Model particle content respectively; both are small
+      and are passed in.
+    """
+    resolved = solve_n_star_resolved(background, xi_higgs=xi_higgs)["N_star"]
+
+    # The sudden-decay comparison must use the SAME width as the resolved run.
+    # solve_n_star() internally calls scalaron_decay_rate(), which carries no
+    # xi_H dependence, so comparing against it at xi_H = 1/6 would charge the
+    # budget with the ~1 e-fold Higgs effect on top of the treatment
+    # difference and inflate sigma by a factor of three.
+    def sudden_n_star(n_star):
+        rebased = background.rebase(n_star)
+        energies = rebased.energy_densities()
+        gamma = decay_rate_sm(energies["M_over_Mpl"], xi_higgs=xi_higgs)
+        rho_reh = rho_from_temperature(reheating_temperature(gamma))
+        return matching_n_star(energies["V_star"], energies["rho_end"], rho_reh)
+
+    low, high = 35.0, 59.0
+    sudden = brentq(lambda n: sudden_n_star(n) - n, low, high, xtol=1.0e-10)
+    terms = {
+        "decay_rate": float(np.log(gamma_factor) / 6.0),
+        "reheating_treatment": float(abs(resolved - sudden)),
+        "equation_of_state": float(eos_efolds),
+        "g_star": float(g_star_efolds),
+    }
+    total = float(np.sqrt(sum(value**2 for value in terms.values())))
+    return {"terms": terms, "sigma_N_star": total,
+            "N_star_resolved": resolved, "N_star_sudden": sudden}
+
+
 def n_star_from_background(background, w=None):
     """Evaluate the matching formula for one pivot placement (no iteration)."""
     energies = background.energy_densities()

@@ -36,17 +36,17 @@ four-sphere, $\mu^2=d-1$; integrality of $p$ follows from analyticity of the
 action at $R=0$. Two representative walls---the legacy coordinate rule and
 the canonical invariant-measure choice---paired with minimal and conformal
 Higgs couplings respectively, define the two model branches analyzed. The model retains the Starobinsky predictions
-$n_s\simeq0.962$--$0.964$ and $r\simeq0.004$, and adds an approximately
+$n_s\simeq0.962$--$0.965$ and $r\simeq0.004$, and adds an approximately
 $50\%$ localized deficit in the scalar power spectrum near
 $k\sim10^{-4}\,\mathrm{Mpc}^{-1}$, with no tensor counterpart. The deficit
 location is exactly degenerate between $p$ and the reheating history, but
 the latter is calculable here because the low-curvature limit is exactly
 $R+R^2/6M^2$: the coupled scalaron--radiation system yields
 $N_*=50.6$--$51.6$, set by the Higgs curvature coupling, with an uncertainty
-of $0.2$ e-folds against an integer spacing of $0.94$--$0.99$, so that
+of $0.24$ e-folds against an integer spacing of $0.94$--$0.99$, so that
 the degeneracy is closed and each integer predicts a definite feature location.
 Propagating the exact spectra through CAMB, validated against CLASS to
-$6\times10^{-4}$, and evaluating the official Planck 2018 low-$\ell$
+$1.1\times10^{-3}$, and evaluating the official Planck 2018 low-$\ell$
 Commander and SimAll likelihoods, we find that one integer of each branch is
 excluded ($\Delta\chi^2=+13.6$ and $+8.5$), that the preferred integers give
 $\Delta\chi^2_{TT+EE}=-1.5$ to $-1.7$, and that the evidence marginalized
@@ -129,7 +129,7 @@ exactly degenerate with $N_*$ (Sec.~\ref{sec:reheating}). This degeneracy is clo
 low-curvature limit is exactly Starobinsky, so that reheating is calculable
 rather than parameterized, and the chain
 $A_s\to M\to\Gamma_\phi\to T_{\rm re}\to N_*$ closes with an uncertainty of
-$\sigma(N_*)\simeq0.2$ e-folds against an integer spacing of $0.94$--$0.99$
+$\sigma(N_*)\simeq0.24$ e-folds against an integer spacing of $0.94$--$0.99$
 e-folds,
 so that adjacent integers predict cleanly separated feature locations and
 the location becomes a genuine prediction of each completion.
@@ -141,7 +141,7 @@ experiment could not establish it beyond approximately $2\sigma$, and no
 detection claim is made. The data can, however, exclude: evaluating the
 official Planck 2018 low-$\ell$ likelihoods on the exact spectra rejects one
 integer of each model branch ($\Delta\chi^2=+13.6$ and $+8.5$), while the
-surviving integers improve the fit by $-1.5$ to $-1.7$, with a marginalized
+preferred integers improve the fit by $-1.5$ to $-1.7$, with a marginalized
 value of $+1.0$ that is consistent with noise. The delineation of this
 boundary, together with the closed scale chain and the reproducibility of
 every numerical result from the released code, constitute the principal results reported
@@ -318,8 +318,9 @@ p\in\mathbb{Z},\qquad p>1 .
 \end{equation}
 The discreteness of the model family is therefore derived rather than
 postulated; which integer is realized remains empirical. Beyond the observed
-scalar amplitude, the construction thus has exactly two free inputs: the
-integer $p$ and the zero-work measure of Sec.~\ref{sec:measure}. All
+scalar amplitude, the construction thus has three free inputs: the integer
+$p$, the zero-work measure of Sec.~\ref{sec:measure}, and the matter
+boundary condition $\xi_H$ of Sec.~\ref{sec:relabeling}. All
 subsequent quantities---the horizon curvature, the exit rate, the spectral
 feature, and the reheating history---are computed rather than fitted.
 
@@ -384,7 +385,7 @@ wavenumber is
 \end{equation}
 where $N_*$ is the pivot's e-fold distance to the end of inflation---a
 quantity fixed by the post-inflationary expansion history, not by the
-inflationary action. Numerically $dN_f/dp=0.993$ for the coordinate wall and $0.942$ for the
+inflationary action. Numerically $dN_f/dp=0.993$ for the coordinate wall and $0.946$ for the
 invariant wall, while $N_*$ enters with unit slope: the integer ladder and the reheating history move the feature along
 the same line in $\ln k$, and the two-parameter Fisher matrix is singular at
 this order. A model that leaves $N_*$ free therefore does not predict a
@@ -423,7 +424,7 @@ $d\rho_r/dN=-4\rho_r+(\Gamma_\phi/H)\rho_\phi$ is integrated to
 radiation--scalaron equality, and the standard e-fold matching relation
 \cite{LiddleLeach2003,Planck2018X} is solved as a fixed
 point in $N_*$ jointly with the exact-mode amplitude normalization of $M$.
-The sudden-decay shortcut differs by $0.19$ e-folds---one fifth of the rung
+The sudden-decay shortcut differs by $0.20$ e-folds---one fifth of the rung
 spacing, and enough to move individual rungs by the full size of the observed
 low-$\ell$ effects.
 
@@ -434,7 +435,7 @@ $T_{\rm re}=3.2\times10^{9}\,$GeV; for a conformally coupled Higgs
 $N_*=50.597$ with $T_{\rm re}=1.5\times10^{8}\,$GeV. Both anchors agree
 with the independent literature once pivot and channel bookkeeping are
 fixed: the frequently quoted $N=54.4$ of \cite{BezrukovGorbunov2011} is
-stated at $k=0.002\Mpc$ and converts to $51.1$ at $k_*=0.05\Mpc$;
+stated at $k=0.002\Mpc$ and converts to $51.2$ at $k_*=0.05\Mpc$;
 gravitational-strength decay gives $N_*=50.5$--$51.5$ in
 \cite{Ellis2015}; and the anomaly-mediated conformal channel yields
 $T_{\rm re}\sim10^{8}\,$GeV in \cite{Ema2024}. Larger values in the
@@ -451,13 +452,15 @@ oscillation-averaged value $\bar w_{\rm int}\approx0.03$ of
 so that $H_0$ cancels exactly, removing the Hubble tension from the budget
 entirely. The individual contributions are: a factor-two uncertainty on
 $\Gamma_\phi$, $0.12$ e-folds; the residual difference between the resolved
-and sudden-decay treatments, $0.15$; the measured equation-of-state
+and sudden-decay treatments, $0.20$; the measured equation-of-state
 deviation, $0.05$; and $g_*$, $0.01$---in quadrature
-$\sigma(N_*)\simeq0.2$ e-folds against a rung spacing of $0.94$--$0.99$. The
-integers are therefore separated by more than four standard deviations, and
+$\sigma(N_*)\simeq0.24$ e-folds against a rung spacing of $0.94$--$0.99$. The
+integers are therefore separated by approximately four standard deviations
+($3.98$ at the closest spacing, $4.19$ at the widest), and
 the degeneracy of the previous subsection is closed.
 
 \subsection{The matter-sector relabeling}
+\label{sec:relabeling}
 Scale closure does not, however, imply uniqueness. The Higgs boundary
 condition shifts
 $N_*$ by $-1.02$ e-folds between $\xi_H=0$ and $\xi_H=\tfrac16$---almost
@@ -497,7 +500,7 @@ signature.
 integers at the reheating-determined $N_*$, together with the tensor
 transfer for $p=66$. The vertical line marks the quadrupole scale
 $(\ell+\tfrac12)/\chi_*$ at $\ell=2$. A unit step in $p$ translates the
-deficit by $e^{0.99}$ in $k$; the far-infrared rise at the left edge, which
+deficit by $e^{0.95}$ in $k$; the far-infrared rise at the left edge, which
 exits the plotted range for $p=65$, is generated before classicalization and
 lies outside the present horizon for all viable integers.}
 \label{fig:transfer}
@@ -507,7 +510,8 @@ Two computed negative results delimit the information carried by the feature.
 First, the deficit is not generic to frozen-horizon exits: the
 single-operator linear wall ($\alpha=0$, which has no fast-roll shoulder)
 yields a maximal deficit of $1\%$, i.e.\ no observable feature. The
-phenomenology requires $\alpha>0$ and hence both high-curvature operators;
+phenomenology requires $\alpha>1$---at $\alpha\le1$ the maximum of $S$ sits at
+$z=0$ with $S=1$---and hence both high-curvature operators;
 reduced single-operator walls eliminate the signal. The intermediate
 $d\ln R$ wall ($\alpha=2$, $S_{\max}=1.125$) produces a deficit of depth
 $\simeq0.71$---the wall shape, and hence the depth, is independent of
@@ -534,25 +538,26 @@ its own smooth continuation with the identical cosmology, so the radiation
 transfer, reionization, lensing, and late integrated Sachs--Wolfe (ISW)
 contributions cancel to first order in the ratio. CLASS \cite{CLASS}, fed the
 same tables through an entirely separate input path, reproduces every ratio
-at $\ell\le30$ to better than $6\times10^{-4}$. Table~\ref{tab:cmbratios}
+at $\ell\le30$ to better than $1.1\times10^{-3}$ in $TT$, $EE$ and $TE$
+(and better than $6.7\times10^{-4}$ in $TT$ and $EE$). Table~\ref{tab:cmbratios}
 shows the broad and narrow members of the invariant-wall branch, matching
 the presentation of Table~\ref{tab:candidate} and Figs.~\ref{fig:transfer}
 and~\ref{fig:clratios} (the branch's third viable integer, $p=67$, lies
 closer still to the smooth limit); the coordinate branch exhibits the same
-broad and narrow patterns one integer lower, and its likelihood values are
+broad and narrow patterns two integers lower, and its likelihood values are
 given in Table~\ref{tab:likelihood}.
 
 Two properties of the transfer are relevant. The late ISW dilutes the temperature
 signal---a Sachs--Wolfe-only estimate overstates the quadrupole suppression
 by roughly a third---while $EE$, which carries no ISW, retains the deeper
-imprint: for the broad pattern the $\ell=2$ ratios are $0.67$ in $EE$ against
-$0.83$ in $TT$ (Table~\ref{tab:cmbratios}). This is the model-level counterpart of the long-standing
+imprint: for the broad pattern the $\ell=2$ ratios are $0.68$ in $EE$ against
+$0.84$ in $TT$ (Table~\ref{tab:cmbratios}). This is the model-level counterpart of the long-standing
 proposal to use large-angle polarization to test whether the low-$\ell$
 deficit is primordial \cite{MortonsonHu2009,Cline2003,Billi2019}, with the
 standard caveat that at these multipoles only the temperature-uncorrelated
 component of $EE$ carries independent information. And the two surviving
 rungs of each branch are distinguished
-not by the quadrupole (both $\simeq18\%$ suppressed) but by the
+not by the quadrupole (both $\simeq16\%$ suppressed) but by the
 \emph{width} of the suppression (Fig.~\ref{fig:clratios}): the broad pattern
 reaches $C_3^{TT}/C_3^{\rm smooth}=0.73$ and persists past $\ell=10$, while
 the narrow one is back above $0.92$ by $\ell=5$. This correlated $TT$--$TE$--$EE$ width
@@ -580,9 +585,10 @@ native implementations distributed with \textsc{cobaya} \cite{Cobaya},
 validated on the Planck best-fit spectrum. Table~\ref{tab:likelihood} gives the result for
 both branches at their reheating-determined $N_*$. A simpler diagnostic based
 on diagonal errors for the released band powers overestimates the
-polarization penalty of the broad pattern by an order of magnitude ($+1.7$,
-against $+0.2$ from the exact non-Gaussian SimAll likelihood); all $EE$
-contributions under the exact likelihood are below $0.7$ in magnitude, while
+polarization penalty of the broad pattern by more than an order of
+magnitude ($+1.33$, against $+0.07$ from the exact non-Gaussian SimAll
+likelihood); all $EE$
+contributions under the exact likelihood are below $0.75$ in magnitude, while
 the temperature differences survive essentially unchanged.
 \input{tables/likelihood.tex}
 
@@ -623,7 +629,9 @@ infrared-cutoff families reaches the same verdict \cite{Upadhyay2026}.
 Against that economy of roughly three units of $\chi^2$ per fitted
 parameter, $-1.5$ to $-1.7$ with no fitted feature parameter is competitive
 --- the marginalized evidence of Table~\ref{tab:evidence} is the Bayesian
-counterpart, with no Occam penalty to pay --- and it responds directly to
+counterpart---and one that does carry the look-elsewhere penalty
+explicitly, $+1.70$ for the best single integer against $+0.99$
+marginalized---and it responds directly to
 the a-posteriori-selection critique of low-multipole explanations
 \cite{Bennett2011,Planck2018VII}. The complementary result is of greater consequence: because the members of the family carry no adjustable scale, they
 can be rejected outright, and the $+13.6$ and $+8.5$ exclusions have no
@@ -658,10 +666,9 @@ attracting trajectory, and no measurable quantity depends on where inflation
 began.
 
 The model determines the following observables with no remaining freedom:
-$n_s\simeq0.962$--$0.964$, $r\simeq0.004$, a scalar deficit of depth
+$n_s\simeq0.962$--$0.965$, $r\simeq0.004$, a scalar deficit of depth
 $\sim0.5$ at a computed wavenumber, no tensor counterpart above
-$2\times10^{-3}$, no isocurvature, a squeezed bispectrum tracking the local
-spectral slope through a sign change at the notch edges, and the correlated
+$2\times10^{-3}$, no isocurvature, and the correlated
 $TT$--$TE$--$EE$ width pattern of Sec.~\ref{sec:cmb}. It is falsified by a
 confirmed smooth scalar spectrum through the relevant low-$k$ window, by a
 tensor notch correlated with the scalar one, by significant primordial
@@ -683,7 +690,7 @@ between Euclidean action and horizon entropy to this $f(R)$ saddle. Because the 
 $f_R(R_H)=p(1+\alpha)/3$ while $q\simeq p(1+\alpha)$, the entropy reduces to
 $32\pi^2(\Mpl/M)^2\,[1+\mathcal{O}(1/p)]\simeq1.8\times10^{12}$: it is set by
 the observed scalar amplitude alone, to within a few percent across the
-family, and lies some seventy-six orders of magnitude below the present
+family, and lies some one hundred and ten orders of magnitude below the present
 de~Sitter bound---a computably low-entropy initial condition. More
 suggestively, the canonical measure of Sec.~\ref{sec:measure} is
 $d\phi\propto d\ln f_R$, the logarithm of the Wald entropy coefficient, so
@@ -733,15 +740,16 @@ metric theory, with the horizon curvature and the instability rate as
 independent algebraic data rather than as outputs of the conformal anomaly.
 
 \item The integrality of $p$ follows from analyticity of the action at
-$R=0$, so the family of completions is discrete rather than continuous. Two
-inputs remain free: the value of $p$, and the integration measure entering
-the zero-work condition.
+$R=0$, so the family of completions is discrete rather than continuous.
+Three inputs remain free: the value of $p$, the integration measure
+entering the zero-work condition, and the matter boundary condition
+$\xi_H$, which relabels the ladder rather than moving it.
 
 \item The wavenumber of the primordial feature is exactly degenerate with
 the reheating history, and no fit can break the degeneracy. Because the
 low-curvature limit is exactly Starobinsky, the reheating history is
 computable: solving the coupled scalaron--radiation system gives
-$N_*=50.6$--$51.6$ with an uncertainty of $0.2$ e-folds against an integer
+$N_*=50.6$--$51.6$ with an uncertainty of $0.24$ e-folds against an integer
 spacing of $0.94$--$0.99$, so that each integer predicts a definite feature
 location. The results indicate that feature models generally require a
 computed reheating history before a feature scale can be claimed.

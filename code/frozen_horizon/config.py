@@ -13,13 +13,19 @@ A_S_OBS = 2.1e-9      # scalar amplitude used to normalize the mass scale M
 K_PIVOT = 0.05        # Mpc^-1, pivot wavenumber
 CHI_STAR = 13870.0    # Mpc, approximate comoving distance to last scattering
 
-# Number of e-folds from pivot crossing to the end of inflation.
+# Seed for the N_* fixed-point iteration ONLY -- not a physical input.
 #
-# This is NOT derived: it is fixed by reheating, which the model does not yet
-# describe. It is the sole conversion between the dimensionless k/k_pivot of
-# the mode integration and physical Mpc^-1, and d ln k / d N_STAR = 1 exactly,
-# so a one e-fold shift moves every feature by a factor of e. Treat it as a
-# nuisance parameter with an uncertainty of order +/- 1, not as a constant.
+# N_* IS derived: reheating.solve_n_star_resolved() computes it from the
+# integrated scalaron/radiation history, giving 51.62 (xi_H = 0) and 50.60
+# (xi_H = 1/6) on the primary branch. Pass --n-star auto to run_pipeline.py to
+# solve that fixed point; a literal goes stale silently when the reheating
+# model changes, which is how the first release computed its spectra at
+# 50.5852 against a converged 50.5966.
+#
+# The value below is the superseded benchmark, retained only as a bracket seed
+# because the iteration converges from it in one step. It is deliberately NOT
+# a plausible answer, so that any run which ends up reporting it is visibly
+# wrong rather than quietly off by an e-fold.
 N_STAR = 55.0
 
 # --- Background integration ------------------------------------------------
@@ -130,4 +136,5 @@ FIDUCIAL_COSMOLOGY = {
 
 # --- Default model ---------------------------------------------------------
 
-DEFAULT_P = 67
+# The primary candidate of Paper I: p = 66 on the invariant wall.
+DEFAULT_P = 66

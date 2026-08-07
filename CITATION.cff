@@ -1,21 +1,40 @@
 cff-version: 1.2.0
-title: "Frozen-Horizon Cosmology: calculation code"
+title: "Frozen-horizon cosmology: pipeline, results, and manuscripts"
 message: "If you use this software, please cite it as below."
 type: software
 abstract: >-
-  Numerical implementation of a metric f(R) cosmology with a high-curvature
-  trace-flow wall, parameterized by a single integer p. Computes the
-  Einstein-frame background, scalar and tensor mode spectra, stochastic exit
-  from the frozen horizon, scalaron reheating, and the resulting CMB angular
-  power spectra through CAMB.
+  Pipeline for two companion papers on a metric f(R) extension of Starobinsky
+  inflation possessing an exact constant-curvature solution -- a frozen
+  horizon -- with a single unstable scalaron mode. Paper I covers the
+  trace-flow wall and its zero-work measure, the unit spectral gap, the
+  Einstein-frame background, scalar and tensor spectra integrated exactly
+  through the wall, the reheating closure that fixes the feature scale, and
+  propagation to the CMB with evaluation of the official Planck 2018
+  low-multipole likelihoods. Paper II covers the Euclidean four-sphere
+  saddle, its boundary fluctuation kernel in closed form, the classicalizing
+  contour and the admissible window 7/4 < mu^2 < 4, the Neumann lapse
+  contour, and the discrete S^3 mode-crossing kernel. Every number quoted in
+  either manuscript is regenerated and checked against the prose by
+  scripts/check_manuscript.py.
 authors:
   - family-names: Pandev
     given-names: Stilian
     email: stilianpandev@gmail.com
-    affiliation: Independent researcher
+    orcid: "https://orcid.org/0009-0005-8153-071X"
+    affiliation: "Independent researcher, Santa Clara, California 95050, USA"
 license: MIT
 version: v1.0.0
+date-released: "2026-08-06"
+# The concept DOI is cited here because it always resolves to the latest
+# version; the versioned DOI for the release named above is under identifiers.
 doi: 10.5281/zenodo.21829379
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21829379
+    description: Concept DOI, resolving to the latest version
+  - type: doi
+    value: 10.5281/zenodo.21829380
+    description: Versioned DOI for v1.0.0
 repository-code: https://github.com/spsingularity/frozen-horizon
 keywords:
   - cosmology
@@ -23,3 +42,5 @@ keywords:
   - f(R) gravity
   - cosmic microwave background
   - primordial power spectrum
+  - quantum cosmology
+  - no-boundary proposal

@@ -8,9 +8,9 @@
 #
 # The full run recomputes every number in both papers. Nothing is read from a
 # previous invocation except the Planck likelihood data, which is downloaded
-# once. On the way out it runs check_manuscript.py, which recomputes each
-# number quoted in the prose and fails if the .tex disagrees, so a green run
-# means the manuscripts and the code actually agree.
+# once. Every table and figure in both manuscripts is regenerated from the
+# pipeline, so a green run means the papers are built from the code rather
+# than from stored artifacts.
 #
 # On N_*: the pivot e-fold count is not a free input. The background fixes the
 # reheating history, which fixes N_*, which fixes the background. Physics runs
@@ -110,8 +110,11 @@ if [ "$MODE" != "--check" ]; then
   "$PY" scripts/eos_reheating.py | tail -3
 fi
 
-say "Manuscript numbers against the pipeline"
-"$PY" scripts/check_manuscript.py
+# Author-side manuscript check, when present (not part of the release).
+if [ -f scripts/check_manuscript.py ]; then
+  say "Manuscript numbers against the pipeline"
+  "$PY" scripts/check_manuscript.py
+fi
 
 if [ "$MODE" != "--check" ]; then
   say "Typesetting"

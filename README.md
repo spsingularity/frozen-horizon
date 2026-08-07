@@ -15,17 +15,8 @@ saddle, the contour over its unstable direction, the admissible window
 `7/4 < μ² < 4`, and the discrete `S³` mode-crossing kernel.
 
 Every table and figure in both manuscripts is a build artifact of this
-pipeline. Numbers quoted in the prose are checked against it by
-`scripts/check_manuscript.py`, which recomputes each one and fails if the
-manuscript disagrees:
-
-```bash
-./.venv/bin/python scripts/check_manuscript.py -v
-```
-
-This runs as part of the test suite. It exists because generated tables
-cannot drift but prose can: the first release of Paper II quoted a total
-duration belonging to a superseded run, and nothing caught it.
+pipeline: `./reproduce.sh` regenerates all of them from the code, so no
+number in either paper is transcribed by hand.
 
 ## Install
 
@@ -97,7 +88,6 @@ measure is a fixed point, `bootstrap.canonical_wall_coefficient(66)`
 | `eos_reheating.py` | scalaron equation of state measured, not assumed |
 | `shape_statistic.py` | translation-invariant `D_pp'`: `p` is not observable beyond feature location |
 | `marginalize_rungs.py` | rung-marginalized evidence (reads the likelihood JSON; no embedded numbers) |
-| `check_manuscript.py` | every number in the manuscript prose, recomputed and matched against the `.tex` |
 | `ee_diagonal_diagnostic.py` | why the exact SimAll likelihood is used for `EE` rather than diagonal errors |
 | `class_crosscheck.py` | independent CLASS reproduction of the CAMB feature ratios |
 

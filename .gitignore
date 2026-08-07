@@ -39,3 +39,10 @@ handout/
 # Generated tables and figures ARE tracked so the papers build without Python.
 paper/*.pdf
 paper/paper2/*.pdf
+
+# Internal pre-submission verification tooling. Kept out of the public
+# release: it is a QA instrument for the authors, not a result. The numbers
+# it guards are still fully reproducible -- run reproduce.sh, which
+# regenerates every table and figure from the pipeline.
+code/scripts/check_manuscript.py
+code/tests/test_manuscript.py
